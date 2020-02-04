@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>JS对象属性的可枚举性(enumerable) | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="javascript">
+    <meta name="description" content="要点★属性的可枚举性将影响以下三个函数的结果：for…in，Object.keys()，JSON.stringify。具体来说，如果属性的enumerable为false，这三个函数的操作将不会取到这个属性；★通过常规赋值方式添加的属性都是可枚举的、可修改的、可删除的；★内部属性和内部方法通常都是不可枚举的；★for…in与静态方法”Object.keys()”的区别是：前者包含对象 继承自原型对">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS对象属性的可枚举性(enumerable)">
+<meta property="og:url" content="https://congzhou09.github.io/knowledge/js对象属性的可枚举性.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="要点★属性的可枚举性将影响以下三个函数的结果：for…in，Object.keys()，JSON.stringify。具体来说，如果属性的enumerable为false，这三个函数的操作将不会取到这个属性；★通过常规赋值方式添加的属性都是可枚举的、可修改的、可删除的；★内部属性和内部方法通常都是不可枚举的；★for…in与静态方法”Object.keys()”的区别是：前者包含对象 继承自原型对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-06T15:49:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS对象属性的可枚举性(enumerable)">
+<meta name="twitter:description" content="要点★属性的可枚举性将影响以下三个函数的结果：for…in，Object.keys()，JSON.stringify。具体来说，如果属性的enumerable为false，这三个函数的操作将不会取到这个属性；★通过常规赋值方式添加的属性都是可枚举的、可修改的、可删除的；★内部属性和内部方法通常都是不可枚举的；★for…in与静态方法”Object.keys()”的区别是：前者包含对象 继承自原型对">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+  <body>
+    <div id="loading" class="active"></div>
+ <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Congzhou</h5>
+          <h6 class="mail">yuancongzhou@yeah.net</h6>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archive"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JS对象属性的可枚举性(enumerable)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">JS对象属性的可枚举性(enumerable)</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-06T15:49:35.000Z" itemprop="datePublished" class="page-time">
+  2018-03-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/knowledge/">知识解惑</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#要点"><span class="post-toc-number">1.</span> <span class="post-toc-text">要点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例1"><span class="post-toc-number">2.</span> <span class="post-toc-text">实例1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例2"><span class="post-toc-number">3.</span> <span class="post-toc-text">实例2</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-js对象属性的可枚举性"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JS对象属性的可枚举性(enumerable)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-06 23:49:35" datetime="2018-03-06T15:49:35.000Z"  itemprop="datePublished">2018-03-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/knowledge/">知识解惑</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><p>★属性的可枚举性将影响以下三个函数的结果：for…in，Object.keys()，JSON.stringify。具体来说，如果属性的enumerable为false，这三个函数的操作将不会取到这个属性；<br>★通过常规赋值方式添加的属性都是可枚举的、可修改的、可删除的；<br>★内部属性和内部方法通常都是不可枚举的；<br>★for…in与静态方法”Object.keys()”的区别是：前者包含对象 <strong>继承自原型对象的</strong> 可枚举属性，而后者只包括 <strong>对象本身的</strong> 可枚举属性；<br>★静态方法”JSON.stringify”读取对象本身的可枚举属性并序列化为JSON对象；<br>★静态方法”Object.getOwnPropertyNames”用于获取对象本身的所有（包括可枚举和不可枚举）的属性的名称；<br>★静态方法”Object.defineProperty”<br>（1）用于为对象添加新属性或修改已有属性；<br>（2）函数用法Object.defineProperty(obj , prop , descriptor )，其中obj是待添加或修改属性的对象，prop是待添加或修改的属性名称，descriptor是一个包含对属性描述的对象。descriptor必然是”data descriptor”和”access descripor”两种形式中的一种；<br>（3）”data descriptor”独有的key：value（属性的值，默认为undefined），writable（是否可写，默认为false）<br>（4）”access descripor”独有的key：get（函数返回值作为属性的值，默认为undefined）和set（通过调用此函数改变get函数的返回值，默认为undefined）<br>（5）”data descriptor”和”access descripor”公有的key：enumerable（可枚举性，默认为false），configurable（descriptor的类型是否可变并且属性是否可被delete，默认为false）；</p>
+<h3 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">  this.va=1;</span><br><span class="line"> &#125;</span><br><span class="line"> A.prototype.vb=2;</span><br><span class="line"> var a= new A();</span><br><span class="line"> Object.defineProperty(a, &quot;vc&quot;, &#123;value:3&#125;);</span><br><span class="line"></span><br><span class="line"> var inArr= [];</span><br><span class="line"> for(var para in a)</span><br><span class="line"> &#123;</span><br><span class="line">  inArr.push(para);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> console.log(Object.keys(a));  //  [&quot;va&quot;]</span><br><span class="line"> console.log(Object.getOwnPropertyNames(a));  //  [&quot;va&quot;, &quot;vc&quot;]</span><br><span class="line"> console.log(JSON.stringify(a));   // &#123;&quot;va&quot;:1&#125;</span><br><span class="line"> console.log(inArr);  // [&quot;va&quot;, &quot;vb&quot;]</span><br><span class="line"></span><br><span class="line">a[&quot;vc&quot;]= 8;</span><br><span class="line">console.log(a[&quot;vc&quot;]); // 3</span><br><span class="line"></span><br><span class="line">delete a[&quot;vc&quot;]; // delete将返回false</span><br><span class="line">console.log(a[&quot;vc&quot;]); // 3</span><br><span class="line"></span><br><span class="line">Object.defineProperty(a, &quot;vd&quot;, &#123;value:4, writable: true&#125;);</span><br><span class="line"></span><br><span class="line">a[&quot;vd&quot;]= 8;</span><br><span class="line">console.log(a[&quot;vd&quot;]); // 8</span><br><span class="line"></span><br><span class="line">delete a[&quot;vd&quot;]; // delete将返回false</span><br><span class="line">console.log(a[&quot;vd&quot;]); // 8</span><br><span class="line"></span><br><span class="line">Object.defineProperty(a, &quot;ve&quot;, &#123;value:4, configurable: true&#125;);</span><br><span class="line"></span><br><span class="line">delete a[&quot;ve&quot;]; // delete将返回true</span><br><span class="line">console.log(a[&quot;ve&quot;]); // undefined</span><br></pre></td></tr></table></figure>
+<h3 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.getName = function()&#123;</span><br><span class="line">    return this.name ;</span><br><span class="line">&#125;;</span><br><span class="line">function Stuff1(name, id)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.id = id;</span><br><span class="line">&#125;</span><br><span class="line">for(var fn in Person.prototype)&#123;</span><br><span class="line">    Stuff1.prototype[fn] = Person.prototype[fn];</span><br><span class="line">&#125;</span><br><span class="line">var piupiu1 = new Stuff1(&quot;piupiu1&quot;,&quot;008&quot;);</span><br><span class="line">console.log(piupiu1.constructor === Stuff1);//打印true</span><br></pre></td></tr></table></figure>
+<font color="blue"><br>解析:Person.prototype的三个属性(constructor,getName,__proto__)，仅有getName属性可枚举，于是Stuff1.prototype仅仅继承了“getName”属性，打印的constructor仍是自己的。<br></font>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-06T15:49:35.000Z" itemprop="dateUpdated">2018-03-06 23:49:35</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/knowledge/js的原型链、new、constructor、instanceof.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JS的原型链、new、constructor、instanceof</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/practice/nginx限制请求频率.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">nginx限制请求频率</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+            
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+ <script src="/js/waves.min.js"></script>
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+  
+
+  lazyScripts.push('/js/busuanzi.pure.min.js');
+</script>
+
+<script src="/js/main.min.js"></script>
+ 
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js" async></script>
+ 
+ 
+ 
+
+
+
+    <script>
+      //访问config.host的数据统计
+      // if (
+      //   typeof TDGA !== "undefined" &&
+      //   "congzhou09.github.io" === location.hostname
+      // ) {
+      //   TDGA.Account({
+      //     accountId: sessionStorage.getItem("__TD_sessionId")
+      //   });
+
+      //   TDGA.onEvent("visit", {
+      //     destination: location.hostname,
+      //     referrer: document.referrer
+      //   });
+      // }
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

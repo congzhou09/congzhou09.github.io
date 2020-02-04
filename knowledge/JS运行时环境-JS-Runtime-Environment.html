@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>JS运行时环境(JS Runtime Environment) | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="javascript,JS引擎,JS Runtime,浏览器">
+    <meta name="description" content="概述◆浏览器中都具有JS运行时环境(JS Runtime Environment)，而运行时环境里包含了：（1）Web API，如setTimeout、DOM、Ajax，这些API由浏览器提供，在运行时环境里可访问；（2）JS引擎，用于代码的解析与编译；（3）回调队列(Callback Queue)；（4）事件循环(Event Loop)；       ◆JS Runtime之于JS引擎的关系类似">
+<meta name="keywords" content="javascript,JS引擎,JS Runtime,浏览器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS运行时环境(JS Runtime Environment)">
+<meta property="og:url" content="https://congzhou09.github.io/knowledge/JS运行时环境-JS-Runtime-Environment.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="概述◆浏览器中都具有JS运行时环境(JS Runtime Environment)，而运行时环境里包含了：（1）Web API，如setTimeout、DOM、Ajax，这些API由浏览器提供，在运行时环境里可访问；（2）JS引擎，用于代码的解析与编译；（3）回调队列(Callback Queue)；（4）事件循环(Event Loop)；       ◆JS Runtime之于JS引擎的关系类似">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://congzhou09.github.io/knowledge/JS运行时环境-JS-Runtime-Environment/js_runtime_environment.png">
+<meta property="og:image" content="https://congzhou09.github.io/knowledge/JS运行时环境-JS-Runtime-Environment/call_stack.png">
+<meta property="og:image" content="https://congzhou09.github.io/knowledge/JS运行时环境-JS-Runtime-Environment/js_parsing.png">
+<meta property="og:updated_time" content="2020-02-04T06:23:30.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS运行时环境(JS Runtime Environment)">
+<meta name="twitter:description" content="概述◆浏览器中都具有JS运行时环境(JS Runtime Environment)，而运行时环境里包含了：（1）Web API，如setTimeout、DOM、Ajax，这些API由浏览器提供，在运行时环境里可访问；（2）JS引擎，用于代码的解析与编译；（3）回调队列(Callback Queue)；（4）事件循环(Event Loop)；       ◆JS Runtime之于JS引擎的关系类似">
+<meta name="twitter:image" content="https://congzhou09.github.io/knowledge/JS运行时环境-JS-Runtime-Environment/js_runtime_environment.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+  <body>
+    <div id="loading" class="active"></div>
+ <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Congzhou</h5>
+          <h6 class="mail">yuancongzhou@yeah.net</h6>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archive"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JS运行时环境(JS Runtime Environment)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">JS运行时环境(JS Runtime Environment)</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-05T04:00:01.000Z" itemprop="datePublished" class="page-time">
+  2019-11-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/knowledge/">知识解惑</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JS引擎"><span class="post-toc-number">2.</span> <span class="post-toc-text">JS引擎</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Web-API-amp-Callback-Queue-amp-Event-Loop"><span class="post-toc-number">3.</span> <span class="post-toc-text">Web API &amp; Callback Queue &amp; Event Loop</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#同步与异步、阻塞与非阻塞"><span class="post-toc-number">4.</span> <span class="post-toc-text">同步与异步、阻塞与非阻塞</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-JS运行时环境-JS-Runtime-Environment"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JS运行时环境(JS Runtime Environment)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-05 12:00:01" datetime="2019-11-05T04:00:01.000Z"  itemprop="datePublished">2019-11-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/knowledge/">知识解惑</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>◆浏览器中都具有JS运行时环境(JS Runtime Environment)，而运行时环境里包含了：<br>（1）Web API，如setTimeout、DOM、Ajax，这些API由浏览器提供，在运行时环境里可访问；<br>（2）JS引擎，用于代码的解析与编译；<br>（3）回调队列(Callback Queue)；<br>（4）事件循环(Event Loop)；</p>
+<div class="img-container" style="width: 87%;"><br>    <img src="/knowledge/JS运行时环境-JS-Runtime-Environment/js_runtime_environment.png"><br></div>
+
+<p>◆JS Runtime之于JS引擎的关系类似于乐曲演奏者之于乐器；<br>◆常见的JS引擎实例是谷歌V8引擎，Chrome和Node.js使用了相同的JS引擎，但具有不同的JS Runtime；</p>
+<h3 id="JS引擎"><a href="#JS引擎" class="headerlink" title="JS引擎"></a>JS引擎</h3><p>○JS引擎负责JS的解析和JIT编译成机器码，主要包含如上图黑框中的两部分：内存堆（Memory Heap，内存分配的地方）、调用栈（Call Stack，随着代码运行堆栈帧所在地方）；<br>○JS引擎处理代码过程：<br>（1）部分解析代码以检查语法错误；<br>（2）从上到下解析与编译所有代码成机器码；<br>○调用栈记录当前所处程序中位置，以下面代码段为例，调用栈开始是空的，随着这些代码段变化过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function multiply(x, y) &#123;</span><br><span class="line">    return x * y;</span><br><span class="line">&#125;</span><br><span class="line">function printSquare(x) &#123;</span><br><span class="line">    var s = multiply(x, x);</span><br><span class="line">    console.log(s);</span><br><span class="line">&#125;</span><br><span class="line">printSquare(5);</span><br></pre></td></tr></table></figure></p>
+<div class="img-container" style="width: 87%;"><br>    <img src="/knowledge/JS运行时环境-JS-Runtime-Environment/call_stack.png"><br></div>
+
+<p>//调用栈里每个入口称为一个栈帧，处理异常抛出的栈追踪(stack trace)正是异常发生时调用栈的状态</p>
+<h3 id="Web-API-amp-Callback-Queue-amp-Event-Loop"><a href="#Web-API-amp-Callback-Queue-amp-Event-Loop" class="headerlink" title="Web API &amp; Callback Queue &amp; Event Loop"></a>Web API &amp; Callback Queue &amp; Event Loop</h3><p>○JS引擎解析代码过程涉及了JS Runtime Environment中各个部分：<br>（1）遇到变量与函数声明则存储在内存堆，遇到函数调用则将函数添加到调用栈栈顶、转而解析函数内的代码，遇到Web API则将函数发给Web API；<br>（2）Web API执行从调用栈发来的调用，如事件监听、Ajax请求、定时器等，然后等待事件的触发，如点击事件、Ajax返回、定时器时间到等，上述事件触发时将回调函数发到回调队列（Callback Queue），即使当前Call Stack中有正在运行的代码也无须等待；<br>（3）Callback Queue按照收到顺序存储所有回调函数，Event Loop不断监视Call Stack是否完全为空及Callback Queue是否有内容，满足上述条件则通知Callback Queue将队首的回调函数发到Call Stack执行；</p>
+<div class="img-container" style="width: 87%;"><br>    <img src="/knowledge/JS运行时环境-JS-Runtime-Environment/js_parsing.png"><br></div>
+
+<h3 id="同步与异步、阻塞与非阻塞"><a href="#同步与异步、阻塞与非阻塞" class="headerlink" title="同步与异步、阻塞与非阻塞"></a>同步与异步、阻塞与非阻塞</h3><p>■结合上述JS运行时环境解释JS语言的两个特性：同步与异步、阻塞与非阻塞<br>（1）同步和阻塞指的是Call Stack里的执行过程是单线程，同时只能执行栈顶函数，栈顶函数执行完毕并从Call Stack推出之前，Call Stack里的其他函数将被阻塞；<br>（2）异步和非阻塞指的是调用浏览器提供的Web API时不会占用Call Stack，Call Stack后面的代码可以继续执行，只有Web API返回的回调函数要执行的时候才回到Call Stack里；</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-04T06:23:30.710Z" itemprop="dateUpdated">2020-02-04 14:23:30</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-Runtime/">JS Runtime</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS引擎/">JS引擎</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浏览器/">浏览器</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/handbook/webpack项目自动代码检查与格式化的实现.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">webpack项目自动代码检查与格式化的实现</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/practice/React-Native工程增加Expo支持.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">React Native工程增加Expo支持</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+            
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+ <script src="/js/waves.min.js"></script>
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+  
+
+  lazyScripts.push('/js/busuanzi.pure.min.js');
+</script>
+
+<script src="/js/main.min.js"></script>
+ 
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js" async></script>
+ 
+ 
+ 
+
+
+
+    <script>
+      //访问config.host的数据统计
+      // if (
+      //   typeof TDGA !== "undefined" &&
+      //   "congzhou09.github.io" === location.hostname
+      // ) {
+      //   TDGA.Account({
+      //     accountId: sessionStorage.getItem("__TD_sessionId")
+      //   });
+
+      //   TDGA.onEvent("visit", {
+      //     destination: location.hostname,
+      //     referrer: document.referrer
+      //   });
+      // }
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>superset前端本地开发环境搭建 | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="前端,开发环境,superset">
+    <meta name="description" content="项目结构superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。 安装npm依赖包命令行进入assets目录下，执行npm install(或更快的yarn install)。 修改webpack配置修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地址为1">
+<meta name="keywords" content="前端,开发环境,superset">
+<meta property="og:type" content="article">
+<meta property="og:title" content="superset前端本地开发环境搭建">
+<meta property="og:url" content="https://congzhou09.github.io/handbook/superset前端本地开发环境搭建.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="项目结构superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。 安装npm依赖包命令行进入assets目录下，执行npm install(或更快的yarn install)。 修改webpack配置修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地址为1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-04T06:23:30.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="superset前端本地开发环境搭建">
+<meta name="twitter:description" content="项目结构superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。 安装npm依赖包命令行进入assets目录下，执行npm install(或更快的yarn install)。 修改webpack配置修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地址为1">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+  <body>
+    <div id="loading" class="active"></div>
+ <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Congzhou</h5>
+          <h6 class="mail">yuancongzhou@yeah.net</h6>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archive"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">superset前端本地开发环境搭建</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">superset前端本地开发环境搭建</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-10T11:07:51.000Z" itemprop="datePublished" class="page-time">
+  2019-05-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/handbook/">操作手册</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目结构"><span class="post-toc-number">1.</span> <span class="post-toc-text">项目结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装npm依赖包"><span class="post-toc-number">2.</span> <span class="post-toc-text">安装npm依赖包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改webpack配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">修改webpack配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动本地调试"><span class="post-toc-number">4.</span> <span class="post-toc-text">启动本地调试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#windows环境下webpack打包"><span class="post-toc-number">5.</span> <span class="post-toc-text">windows环境下webpack打包</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-superset前端本地开发环境搭建"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">superset前端本地开发环境搭建</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-10 19:07:51" datetime="2019-05-10T11:07:51.000Z"  itemprop="datePublished">2019-05-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/handbook/">操作手册</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。</p>
+<h3 id="安装npm依赖包"><a href="#安装npm依赖包" class="headerlink" title="安装npm依赖包"></a>安装npm依赖包</h3><p>命令行进入assets目录下，执行npm install(或更快的yarn install)。</p>
+<h3 id="修改webpack配置"><a href="#修改webpack配置" class="headerlink" title="修改webpack配置"></a>修改webpack配置</h3><p>修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地址为172.16.2.249，则写为如下形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proxy: &#123;</span><br><span class="line">      context: () =&gt; true,</span><br><span class="line">      &apos;/&apos;: `http://172.16.1.119:$&#123;supersetPort&#125;`,</span><br><span class="line">      target: `http://172.16.1.119:$&#123;supersetPort&#125;`,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动本地调试"><a href="#启动本地调试" class="headerlink" title="启动本地调试"></a>启动本地调试</h3><p>在assets目录下命令行执行：npm run dev-server</p>
+<h3 id="windows环境下webpack打包"><a href="#windows环境下webpack打包" class="headerlink" title="windows环境下webpack打包"></a>windows环境下webpack打包</h3><p>windows下执行“npm run build”报错”无法识别NODE_ENV”，解决办法：安装”cross-env”之后，重新执行“npm run build”，即可正常生成打包文件在dist文件夹中</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-04T06:23:30.734Z" itemprop="dateUpdated">2020-02-04 14:23:30</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/superset/">superset</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境/">开发环境</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/handbook/Apollo前端本地开发环境搭建.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Apollo前端本地开发环境搭建</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/practice/ajax获取与操作图片二进制流并显示.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ajax获取与操作图片二进制流并显示</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+            
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+ <script src="/js/waves.min.js"></script>
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+  
+
+  lazyScripts.push('/js/busuanzi.pure.min.js');
+</script>
+
+<script src="/js/main.min.js"></script>
+ 
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js" async></script>
+ 
+ 
+ 
+
+
+
+    <script>
+      //访问config.host的数据统计
+      // if (
+      //   typeof TDGA !== "undefined" &&
+      //   "congzhou09.github.io" === location.hostname
+      // ) {
+      //   TDGA.Account({
+      //     accountId: sessionStorage.getItem("__TD_sessionId")
+      //   });
+
+      //   TDGA.onEvent("visit", {
+      //     destination: location.hostname,
+      //     referrer: document.referrer
+      //   });
+      // }
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

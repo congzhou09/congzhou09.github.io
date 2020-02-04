@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>ajax获取与操作图片二进制流并显示 | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="二进制流,位操作">
+    <meta name="description" content="业务场景为保护用户隐私，图片上传至服务器后服务器做了按位异或处理，达到无法直接通过图片链接或图片文件查看用户所上传图片内容的目的。如此就要求前端展示时对图片二进制流做相反的位操作才能展示图片内容。 关键代码与注释此处用原生方式书写，实际应用时根据所使用ajax库的语法修改123456789101112131415161718192021const request = new XMLHttpRequ">
+<meta name="keywords" content="二进制流,位操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax获取与操作图片二进制流并显示">
+<meta property="og:url" content="https://congzhou09.github.io/practice/ajax获取与操作图片二进制流并显示.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="业务场景为保护用户隐私，图片上传至服务器后服务器做了按位异或处理，达到无法直接通过图片链接或图片文件查看用户所上传图片内容的目的。如此就要求前端展示时对图片二进制流做相反的位操作才能展示图片内容。 关键代码与注释此处用原生方式书写，实际应用时根据所使用ajax库的语法修改123456789101112131415161718192021const request = new XMLHttpRequ">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://congzhou09.github.io/practice/ajax获取与操作图片二进制流并显示/typed_array.jpg">
+<meta property="og:updated_time" content="2020-02-04T06:23:30.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajax获取与操作图片二进制流并显示">
+<meta name="twitter:description" content="业务场景为保护用户隐私，图片上传至服务器后服务器做了按位异或处理，达到无法直接通过图片链接或图片文件查看用户所上传图片内容的目的。如此就要求前端展示时对图片二进制流做相反的位操作才能展示图片内容。 关键代码与注释此处用原生方式书写，实际应用时根据所使用ajax库的语法修改123456789101112131415161718192021const request = new XMLHttpRequ">
+<meta name="twitter:image" content="https://congzhou09.github.io/practice/ajax获取与操作图片二进制流并显示/typed_array.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+  <body>
+    <div id="loading" class="active"></div>
+ <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Congzhou</h5>
+          <h6 class="mail">yuancongzhou@yeah.net</h6>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archive"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ajax获取与操作图片二进制流并显示</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">ajax获取与操作图片二进制流并显示</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-21T11:48:19.000Z" itemprop="datePublished" class="page-time">
+  2019-03-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/practice/">实践总结</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#业务场景"><span class="post-toc-number">1.</span> <span class="post-toc-text">业务场景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关键代码与注释"><span class="post-toc-number">2.</span> <span class="post-toc-text">关键代码与注释</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关键技术点解析"><span class="post-toc-number">3.</span> <span class="post-toc-text">关键技术点解析</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-ajax获取与操作图片二进制流并显示"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ajax获取与操作图片二进制流并显示</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-21 19:48:19" datetime="2019-03-21T11:48:19.000Z"  itemprop="datePublished">2019-03-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/practice/">实践总结</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h3><p>为保护用户隐私，图片上传至服务器后服务器做了按位异或处理，达到无法直接通过图片链接或图片文件查看用户所上传图片内容的目的。<br>如此就要求前端展示时对图片二进制流做相反的位操作才能展示图片内容。</p>
+<h3 id="关键代码与注释"><a href="#关键代码与注释" class="headerlink" title="关键代码与注释"></a>关键代码与注释</h3><p>此处用原生方式书写，实际应用时根据所使用ajax库的语法修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const request = new XMLHttpRequest();</span><br><span class="line">    //构造get方法用于异步请求图片链接</span><br><span class="line">    request.open(&apos;get&apos;, &quot;/img/encripted.jpg&quot;, true);</span><br><span class="line">    //以arraybuffer的类型解析服务器返回数据</span><br><span class="line">    request.responseType = &apos;arraybuffer&apos;;</span><br><span class="line">    //得到服务器数据后的回调函数</span><br><span class="line">    request.onload = function()&#123;</span><br><span class="line">        const data = request.response;</span><br><span class="line">        //使用DataView遍历与操作二进制流</span><br><span class="line">        let bufferReader = new DataView(data);</span><br><span class="line">        let bufferStr = &apos;&apos;;</span><br><span class="line">        //以每8位为一组，每组按照无符号整数解析成字符串</span><br><span class="line">        for(let i=0;i&lt;bufferReader.byteLength;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            //假设服务器做的是按位异或处理</span><br><span class="line">            bufferStr += String.fromCharCode(bufferReader.getUint8(i)^ 100);</span><br><span class="line">        &#125;</span><br><span class="line">        //将字符串转为base 64格式，使用base 64图片格式展示图片数据内容</span><br><span class="line">        $(&apos;#the-img&apos;).attr(&apos;src&apos;, `data:image/png;base64, $&#123;window.btoa(bufferStr)&#125;`);</span><br><span class="line">    &#125;;</span><br><span class="line">    req1.send();</span><br></pre></td></tr></table></figure></p>
+<h3 id="关键技术点解析"><a href="#关键技术点解析" class="headerlink" title="关键技术点解析"></a>关键技术点解析</h3><p>◎ajax请求的responseType参数指定了以哪种数据类型的数据结构解析服务器返回数据，进而使用数据类型提供的对应函数对数据进行读取或写入操作，<br>可取值及含义可参考[<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/responseType" target="_blank" rel="noopener">MDN web doc之XMLHttpRequest.responseType</a>]</p>
+<p>◎处理二进制数据需要先将原始二进制数据存放在一段连续的内存区域中，ArrayBuffer对象就是用来映射一段通用的、固定长度的内存缓冲区的，通过ArrayBuffer的byteLength属性可得到缓冲区的字节数，但它未提供的直接按字节操作缓冲区的函数，按字节操作需要通过 <strong>类型数组对象</strong> 或 <strong>DataView</strong> 对象。</p>
+<p>◎ <strong>类型数组对象</strong> 包含以下几种类型</p>
+<div class="img-container" style="width: 98%;"><br>    <img src="/practice/ajax获取与操作图片二进制流并显示/typed_array.jpg"><br></div>
+
+<p>以Int8Array为例，基础用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//arraybuffer缓冲区</span><br><span class="line">let buffer = new ArrayBuffer(8);</span><br><span class="line">//以int8Array类型解析缓冲区，即以每8位作为一个单位，每个单位用8位二进制有符号整数解析</span><br><span class="line">let int8Array1 = new Int8Array(buffer);</span><br><span class="line">//输出字节长度8，这个字节长度不会随着解析类型不同而变化</span><br><span class="line">console.log(int8Array2.byteLength);</span><br><span class="line">//以30的有符号整数的二进制(即二进制序列:00011110)填充缓冲区的前8位</span><br><span class="line">int8Array1[0] = 30;</span><br><span class="line">//int8Array2解析同样的缓冲区</span><br><span class="line">let int8Array2 = new Int8Array(buffer);</span><br><span class="line">// 输出30 说明缓冲区已经被int8Array1修改</span><br><span class="line">console.log(int8Array2[0]);</span><br></pre></td></tr></table></figure></p>
+<p>◎ <strong>DataView</strong><br>DataView通过一系列get和set方法（set和get后接类型数组对象的类型名，如setUint8）读取或写入缓冲区。<br>基础用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//arraybuffer缓冲区</span><br><span class="line">let buffer = new ArrayBuffer(8);</span><br><span class="line">//以DataView解析缓冲区</span><br><span class="line">let bufferReader = new DataView(buffer);</span><br><span class="line">//输出字节长度8，这个字节长度不会随着解析类型不同而变化</span><br><span class="line">console.log(bufferReader.byteLength);</span><br><span class="line">//以30的有符号整数的二进制(即二进制序列:00011110)填充缓冲区的前8位</span><br><span class="line">bufferReader.setInt8(0, 30);</span><br><span class="line">// 输出30 缓冲区已经被int8Array1修改</span><br><span class="line">console.log(bufferReader.getInt8(0));</span><br></pre></td></tr></table></figure></p>
+<p>◎Base64是一种基于64个可打印字符[A-Za-z0-9+/]来表示二进制数据的方法，转换过程中每6位为一组。</p>
+<p>◎WindowOrWorkerGlobalScope.btoa()用于从 String 对象创建一个 base-64 编码的 ASCII 字符串，转换过程中字符串里的每个字符都被视为一个二进制数据字节。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-04T06:23:30.722Z" itemprop="dateUpdated">2020-02-04 14:23:30</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/二进制流/">二进制流</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/位操作/">位操作</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/handbook/superset前端本地开发环境搭建.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">superset前端本地开发环境搭建</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/practice/Docker部署前端项目.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Docker部署前端项目</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+            
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+ <script src="/js/waves.min.js"></script>
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+  
+
+  lazyScripts.push('/js/busuanzi.pure.min.js');
+</script>
+
+<script src="/js/main.min.js"></script>
+ 
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js" async></script>
+ 
+ 
+ 
+
+
+
+    <script>
+      //访问config.host的数据统计
+      // if (
+      //   typeof TDGA !== "undefined" &&
+      //   "congzhou09.github.io" === location.hostname
+      // ) {
+      //   TDGA.Account({
+      //     accountId: sessionStorage.getItem("__TD_sessionId")
+      //   });
+
+      //   TDGA.onEvent("visit", {
+      //     destination: location.hostname,
+      //     referrer: document.referrer
+      //   });
+      // }
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>Docker部署前端项目 | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="Docker,容器,前端项目,web项目">
+    <meta name="description" content="对于“通过nginx访问网站资源文件”形式的前端项目，有以下三种方式将项目部署到Docker容器。 资源文件拷贝到容器方式◊假设前端发布压缩包”dist.tar.gz”内部结构是dist文件夹-&amp;gt;index.htnl&amp;amp;static文件夹；◊发布包同目录下创建nginx配置文件”default.conf”，例：123456789101112131415server &amp;#123;">
+<meta name="keywords" content="Docker,容器,前端项目,web项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker部署前端项目">
+<meta property="og:url" content="https://congzhou09.github.io/practice/Docker部署前端项目.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="对于“通过nginx访问网站资源文件”形式的前端项目，有以下三种方式将项目部署到Docker容器。 资源文件拷贝到容器方式◊假设前端发布压缩包”dist.tar.gz”内部结构是dist文件夹-&amp;gt;index.htnl&amp;amp;static文件夹；◊发布包同目录下创建nginx配置文件”default.conf”，例：123456789101112131415server &amp;#123;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-04T06:23:30.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker部署前端项目">
+<meta name="twitter:description" content="对于“通过nginx访问网站资源文件”形式的前端项目，有以下三种方式将项目部署到Docker容器。 资源文件拷贝到容器方式◊假设前端发布压缩包”dist.tar.gz”内部结构是dist文件夹-&amp;gt;index.htnl&amp;amp;static文件夹；◊发布包同目录下创建nginx配置文件”default.conf”，例：123456789101112131415server &amp;#123;">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+  <body>
+    <div id="loading" class="active"></div>
+ <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Congzhou</h5>
+          <h6 class="mail">yuancongzhou@yeah.net</h6>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archive"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Docker部署前端项目</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">Docker部署前端项目</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-01T11:25:56.000Z" itemprop="datePublished" class="page-time">
+  2019-03-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/practice/">实践总结</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#资源文件拷贝到容器方式"><span class="post-toc-number">1.</span> <span class="post-toc-text">资源文件拷贝到容器方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本地目录挂载到容器方式"><span class="post-toc-number">2.</span> <span class="post-toc-text">本地目录挂载到容器方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用数据容器的方式"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用数据容器的方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三种方式比较"><span class="post-toc-number">4.</span> <span class="post-toc-text">三种方式比较</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缺点："><span class="post-toc-number">4.1.</span> <span class="post-toc-text">缺点：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#优点："><span class="post-toc-number">4.2.</span> <span class="post-toc-text">优点：</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-Docker部署前端项目"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Docker部署前端项目</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-01 19:25:56" datetime="2019-03-01T11:25:56.000Z"  itemprop="datePublished">2019-03-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/practice/">实践总结</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>对于“通过nginx访问网站资源文件”形式的前端项目，有以下三种方式将项目部署到Docker容器。</p>
+<h3 id="资源文件拷贝到容器方式"><a href="#资源文件拷贝到容器方式" class="headerlink" title="资源文件拷贝到容器方式"></a>资源文件拷贝到容器方式</h3><p>◊假设前端发布压缩包”dist.tar.gz”内部结构是dist文件夹-&gt;index.htnl&amp;static文件夹；<br>◊发布包同目录下创建nginx配置文件”default.conf”，例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80  default_server;</span><br><span class="line"></span><br><span class="line">         location / &#123;</span><br><span class="line">                root /usr/share/nginx/html/dist;</span><br><span class="line">                index index.html;</span><br><span class="line">                try_files $uri $uri/ /index.html = 404;</span><br><span class="line">        &#125;</span><br><span class="line">        error_page 404 /404.html;</span><br><span class="line">            location = /40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        error_page 500 502 503 504 /50x.html;</span><br><span class="line">            location = /50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>◊发布包同目录下创建Dockerfile，内容示例如下，其中的dist.tar.gz文件Docker会自动做解压，如果是文件夹dist，注意Docker将只拷贝dist文件夹内部的内容；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM nginx:latest</span><br><span class="line">LABEL maintainer &quot;Congzhou&quot;</span><br><span class="line">ADD dist.tar.gz /usr/share/nginx/html</span><br><span class="line">ADD default.conf /etc/nginx/conf.d</span><br><span class="line">EXPOSE 80</span><br></pre></td></tr></table></figure></p>
+<p>◊构建镜像：docker build -t <em>imageName</em>  . ；<br>◊运行测试镜像：docker run -p 4000:80 <em>imageName</em> –name containerName  ;<br>◊浏览器访问 ip:4000;</p>
+<h3 id="本地目录挂载到容器方式"><a href="#本地目录挂载到容器方式" class="headerlink" title="本地目录挂载到容器方式"></a>本地目录挂载到容器方式</h3><p>●运行测试镜像：docker run -p 4000:80 -v /home/docker_congzhou/my_project/agt_jinzhong/nginx_conf:/etc/nginx/conf.d -v /home/docker_congzhou/my_project/agt_jinzhong/nginx_file:/usr/share/nginx/html  nginx  –name containerName  ;<br>●浏览器访问 ip:4000;<br>●通过docker的卷(volume)机制实现将宿主机上的本地目录挂载到容器，这样所做的修改不会随着容器重启而丢失，且在宿主机对应的Volume挂载目录下做修改将在容器中生效；</p>
+<h3 id="使用数据容器的方式"><a href="#使用数据容器的方式" class="headerlink" title="使用数据容器的方式"></a>使用数据容器的方式</h3><p>◆创建包含指定目录挂载的数据容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker create -v /home/docker_congzhou/my_project/agt_jinzhong/nginx_conf:/etc/nginx/conf.d -v /home/docker_congzhou/my_project/agt_jinzhong/nginx_file:/usr/share/nginx/html --name agt_jinzhong_data nginx</span><br></pre></td></tr></table></figure></p>
+<p>◆docker run –rm -p 80:80 –volumes-from agt_jinzhong_data nginx</p>
+<h3 id="三种方式比较"><a href="#三种方式比较" class="headerlink" title="三种方式比较"></a>三种方式比较</h3><p>◇资源文件拷贝到容器方式</p>
+<h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h4><p>（1）运行多个container时每个container内都有一份<br>（2）由于docker容器每次重启都是一个新的环境，在docker容器内做的修改将被还原，当需要修改nginx配置文件或静态资源时需要重新构建镜像；</p>
+<h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><p>（1）通过命令行自动化操作，利于集成到CI/CD流程，更方便地完成滚动更新、服务器迁移、回滚等操作；</p>
+<p>◇本地目录挂载到容器和使用数据容器的方式优缺点与以上相反；</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-04T06:23:30.710Z" itemprop="dateUpdated">2020-02-04 14:23:30</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web项目/">web项目</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端项目/">前端项目</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/practice/ajax获取与操作图片二进制流并显示.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">ajax获取与操作图片二进制流并显示</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/handbook/Docker常用命令.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Docker常用命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+            
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+ <script src="/js/waves.min.js"></script>
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+  
+
+  lazyScripts.push('/js/busuanzi.pure.min.js');
+</script>
+
+<script src="/js/main.min.js"></script>
+ 
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js" async></script>
+ 
+ 
+ 
+
+
+
+    <script>
+      //访问config.host的数据统计
+      // if (
+      //   typeof TDGA !== "undefined" &&
+      //   "congzhou09.github.io" === location.hostname
+      // ) {
+      //   TDGA.Account({
+      //     accountId: sessionStorage.getItem("__TD_sessionId")
+      //   });
+
+      //   TDGA.onEvent("visit", {
+      //     destination: location.hostname,
+      //     referrer: document.referrer
+      //   });
+      // }
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

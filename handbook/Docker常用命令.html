@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>Docker常用命令 | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="Docker,容器,操作手册">
+    <meta name="description" content="●查看docker版本：docker –version●查看docker详细状态：docker info●查看本地image（1）查看可用的：docker image ls（2）查看所有的：docker image ls -a●运行image：docker run options imageName（1）其中的options可取值如下123456◇ 后台运行（detached mode），添加“-">
+<meta name="keywords" content="Docker,容器,操作手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker常用命令">
+<meta property="og:url" content="https://congzhou09.github.io/handbook/Docker常用命令.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="●查看docker版本：docker –version●查看docker详细状态：docker info●查看本地image（1）查看可用的：docker image ls（2）查看所有的：docker image ls -a●运行image：docker run options imageName（1）其中的options可取值如下123456◇ 后台运行（detached mode），添加“-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://congzhou09.github.io/handbook/Docker常用命令/service_ls.png">
+<meta property="og:updated_time" content="2020-02-04T06:23:30.704Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker常用命令">
+<meta name="twitter:description" content="●查看docker版本：docker –version●查看docker详细状态：docker info●查看本地image（1）查看可用的：docker image ls（2）查看所有的：docker image ls -a●运行image：docker run options imageName（1）其中的options可取值如下123456◇ 后台运行（detached mode），添加“-">
+<meta name="twitter:image" content="https://congzhou09.github.io/handbook/Docker常用命令/service_ls.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+  <body>
+    <div id="loading" class="active"></div>
+ <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Congzhou</h5>
+          <h6 class="mail">yuancongzhou@yeah.net</h6>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archive"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Docker常用命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">Docker常用命令</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-02T02:05:12.000Z" itemprop="datePublished" class="page-time">
+  2019-02-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/handbook/">操作手册</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Docker常用命令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Docker常用命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-02 10:05:12" datetime="2019-02-02T02:05:12.000Z"  itemprop="datePublished">2019-02-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/handbook/">操作手册</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>●查看docker版本：docker –version<br>●查看docker详细状态：docker info<br>●查看本地image<br>（1）查看可用的：docker image ls<br>（2）查看所有的：docker image ls -a<br>●运行image：docker run options <em>imageName</em><br>（1）其中的options可取值如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">◇ 后台运行（detached mode），添加“-d”参数，将返回容器ID；</span><br><span class="line">◇ 通过“-p”参数实现端口映射，例：“-p 4000:80”将容器的80端口映射到主机的4000端口，省略参数默认将容器的80端口映射到主机随机端口；</span><br><span class="line">◇ -i: 以交互模式运行容器，通常与 -t 同时使用；</span><br><span class="line">◇ -t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；</span><br><span class="line">◇ --name： 为容器指定一个名字；</span><br><span class="line">◇ --rm：容器退出时自动删除容器及其文件系统，注意不能与-d同时使用，即只能自动清理foreground容器，注意：如果Dockerfile中包含VOLUME语句则一定要带上此参数；</span><br></pre></td></tr></table></figure></p>
+<p>●进入container环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo  docker  exec  -it  containerID  /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>●退出container环境：按”ctrl+q”快捷键；<br>●删除image<br>（1）删除某个：docker image rm <em>imageID</em><br>（2）删除本机所有image：docker image rm $(docker image ls -a -q)<br>（3）删除未被使用的image（dangling image）：docker image prune<br>●查看正在运行的container实例及状态：<br>（1）docker container ls 或 docker ps；<br>（2）同时列举未在运行的实例则增加”–all”(可简写为“-a”)参数；<br>（3）添加“-q”参数则只列出container的ID；<br>●优雅地结束正在运行的image：docker conatiner stop _ContainerName_or_ContainerID_<br>●强制结束正在运行的image：docker conatiner kill _ContainerName_or_ContainerID_<br>●删除容器：<br>（1）删除某个：docker container rm _ContainerName_or_ContainerID_<br>（2）删除本机所有容器：docker container rm $(docker container ls -a -q)<br>（3）删除本机所有未运行的容器：docker container prune<br>●组建swarm<br>（1）为当前机器开启swarm模式将其设置为swarm manager：<br>docker swarm init<br>（2）将其他机器加入swarm<br>docker swarm join<br>●进入容器的bash命令行：<br>docker exec -it _containerName_or_conatinerID_ bash<br>●查看所有service的状态<br>（1）docker service ls ，输出示例如下</p>
+<div class="img-container" style="width: 87%;"><br>    <img src="/handbook/Docker常用命令/service_ls.png"><br></div>
+
+<p>（2）docker stack services <em>stackName</em> ，输出与stackname关联的所有service的状态；<br>●查看service中的所有task：docker service ps <em>serviceName</em> ；<br>●查看task中的所有task：docker stack ps <em>stackName</em> ；<br>●停止应用(stack)：docker stack rm <em>stackName</em> ；</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2020-02-04T06:23:30.704Z" itemprop="dateUpdated">2020-02-04 14:23:30</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/容器/">容器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作手册/">操作手册</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/practice/Docker部署前端项目.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Docker部署前端项目</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/knowledge/Docker知识整理.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Docker知识整理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+            
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+
+
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+ <script src="/js/waves.min.js"></script>
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+  
+
+  lazyScripts.push('/js/busuanzi.pure.min.js');
+</script>
+
+<script src="/js/main.min.js"></script>
+ 
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js" async></script>
+ 
+ 
+ 
+
+
+
+    <script>
+      //访问config.host的数据统计
+      // if (
+      //   typeof TDGA !== "undefined" &&
+      //   "congzhou09.github.io" === location.hostname
+      // ) {
+      //   TDGA.Account({
+      //     accountId: sessionStorage.getItem("__TD_sessionId")
+      //   });
+
+      //   TDGA.onEvent("visit", {
+      //     destination: location.hostname,
+      //     referrer: document.referrer
+      //   });
+      // }
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>
