@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://congzhou09.github.io/"/>
-  <updated>2020-02-04T07:07:02.049Z</updated>
+  <updated>2020-02-17T03:22:35.389Z</updated>
   <id>https://congzhou09.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微服务基本理解</title>
+    <link href="https://congzhou09.github.io/knowledge/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3.html"/>
+    <id>https://congzhou09.github.io/knowledge/微服务基本理解.html</id>
+    <published>2020-02-17T03:18:41.000Z</published>
+    <updated>2020-02-17T03:22:35.389Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>◇微服务是一种架构风格，由Martin Fowler与James Lewis于2014年提出；<br>◇微服务方式是使用一套小服务来开发单个应用，每个服务运行在自己的进程中（每个服务可看作一个小的应用），并使用轻量级机制通信，通常是HTTP API，这些服务能够通过独立的自动化部署，可以分别使用不同的编程语言实现，以及不同数据存储技术，并保持最低限度的集中式管理；<br>◇微服务理念：有效拆分服务，提供一套统一基础架构使得各个微服务能独立的部署、运行、升级，具有轻量级的通信机制进行通信，在结构上松耦合而在功能上表现为一个整体，实现应用的敏捷开发与部署；<br>◇服务拆分原则：当一块业务不依赖或极少依赖其它服务，有独立的业务语义，为超过2个的其他服务或客户端提供数据，那么它就应该被拆分成一个独立的服务模块；<br>◇微服务相关开发工具：<br>（1）Spring Cloud为开发者提供了在分布式系统的配置管理、服务发现、断路器、智能路由、微代理、控制总线等开发工具包；<br>（2）Dubbo<br>（3）Dropwizard（关注单个微服务的开发）<br>◇服务间通信方式：<br>（1）REST，同步方式<br>（2）RPC，同步方式<br>（3）消息队列，异步方式</p><h3 id="单体架构相对微服务架构的缺点"><a href="#单体架构相对微服务架构的缺点" class="headerlink" title="单体架构相对微服务架构的缺点"></a>单体架构相对微服务架构的缺点</h3><p>●代码与模块越多，逻辑复杂性越高越难理解，越难解决遇到的问题；<br>●项目部署与启动速度逐渐变慢，修复局部模块问题需要重启整个项目使问题处理速度变慢；<br>●新技术重构与升级项目的成本逐渐变高，新加模块使用新技术受限制，加入数据分析与监控容易出现性能瓶颈；<br>●不利于按各模块需求伸缩资源（CPU/内存/数据库）；<br>微服务架构相对单体架构的缺点<br>△维护项目变多，处理分布式的场景变多，需要更强的故障处理机制机制；</p><h3 id="重要部件"><a href="#重要部件" class="headerlink" title="重要部件"></a>重要部件</h3><p>●API网关<br>（1）后台服务的聚合，在前端与后台之间提供统一的服务入口，让微服务对前端透明；<br>（2）提供安全、过滤、流量控制等API管理功能；<br>●服务发现，分布式管理各服务链接信息的注册与更新（例：Zookeeper、Eureka、Consul、Etcd）；<br>●故障处理<br>a.减少故障机率<br>（1）监控，各服务设置监控指标与提供状态，采集器采集，UI呈现（例：RedisExporter、MySQLExporter、Prometheus、Grafana）；<br>b.降低故障对整体的影响<br>（1）降级，当某服务的下游非核心服务停止工作，则暂时将其关闭，保证核心业务不中断；<br>（2）熔断，为了避免每次请求都等待超时导致链路资源长时占用进而导致请求堆积，每个服务对其下游服务使用熔断机制快速返回失败并通过定时健康检查自动恢复；</p><p><div class="img-container" style="width: 87%;"><br>    <img src="/knowledge/微服务基本理解/fusing.png"><br></div><br>（3）限流，服务面对瞬时流量过大情况的自我保护，推荐区分服务的限流策略，可应对某个服务由于代码问题发起的大量请求；<br>c.提供故障排查效率<br>（1）链路跟踪（例：Dapper、Zipkin），查看请求经过哪些服务节点及各自的响应时长<br>（2）日志分析，各服务日志采集与检索支持，通常用ELK&lt;Elasticsearch搜索引擎-Logstash日志采集-Kibana UI组件&gt;实现；</p><h3 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h3><p>■配置管理服务<br>（1）配置管理服务集中管理其他各微服务在各运行环境下的配置，配置支持实时动态修改与自动更新到其他各微服务，支持版本控制与内容审计；<br>（2）每个从配置管理服务请求自己的配置并缓存本地；<br>（3）经典案例：Apollo、Spring Cloud默认使用Git存储配置内容；</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;◇微服务是一种架构风格，由Martin Fowler与James Lewis于2014年提出；&lt;br&gt;◇微服务方式是使用一套小服务来开发单个
+      
+    
+    </summary>
+    
+      <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
+    
+    
+      <category term="微服务" scheme="https://congzhou09.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>配置公司GitLab和个人GitHub使用不同的Name和Email</title>
@@ -533,31 +558,6 @@
       
       
         &lt;h4 id=&quot;原型链&quot;&gt;&lt;a href=&quot;#原型链&quot; class=&quot;headerlink&quot; title=&quot;原型链&quot;&gt;&lt;/a&gt;原型链&lt;/h4&gt;&lt;p&gt;□按照ECMAScript标准，&lt;code&gt;[[Prototype]]&lt;/code&gt;是每个对象(包括变量和函数)都有的一个属性，它是
-      
-    
-    </summary>
-    
-      <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
-    
-    
-      <category term="javascript" scheme="https://congzhou09.github.io/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS对象属性的可枚举性(enumerable)</title>
-    <link href="https://congzhou09.github.io/knowledge/js%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E7%9A%84%E5%8F%AF%E6%9E%9A%E4%B8%BE%E6%80%A7.html"/>
-    <id>https://congzhou09.github.io/knowledge/js对象属性的可枚举性.html</id>
-    <published>2018-03-06T15:49:35.000Z</published>
-    <updated>2018-03-06T15:49:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><p>★属性的可枚举性将影响以下三个函数的结果：for…in，Object.keys()，JSON.stringify。具体来说，如果属性的enumerable为false，这三个函数的操作将不会取到这个属性；<br>★通过常规赋值方式添加的属性都是可枚举的、可修改的、可删除的；<br>★内部属性和内部方法通常都是不可枚举的；<br>★for…in与静态方法”Object.keys()”的区别是：前者包含对象 <strong>继承自原型对象的</strong> 可枚举属性，而后者只包括 <strong>对象本身的</strong> 可枚举属性；<br>★静态方法”JSON.stringify”读取对象本身的可枚举属性并序列化为JSON对象；<br>★静态方法”Object.getOwnPropertyNames”用于获取对象本身的所有（包括可枚举和不可枚举）的属性的名称；<br>★静态方法”Object.defineProperty”<br>（1）用于为对象添加新属性或修改已有属性；<br>（2）函数用法Object.defineProperty(obj , prop , descriptor )，其中obj是待添加或修改属性的对象，prop是待添加或修改的属性名称，descriptor是一个包含对属性描述的对象。descriptor必然是”data descriptor”和”access descripor”两种形式中的一种；<br>（3）”data descriptor”独有的key：value（属性的值，默认为undefined），writable（是否可写，默认为false）<br>（4）”access descripor”独有的key：get（函数返回值作为属性的值，默认为undefined）和set（通过调用此函数改变get函数的返回值，默认为undefined）<br>（5）”data descriptor”和”access descripor”公有的key：enumerable（可枚举性，默认为false），configurable（descriptor的类型是否可变并且属性是否可被delete，默认为false）；</p><h3 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">  this.va=1;</span><br><span class="line"> &#125;</span><br><span class="line"> A.prototype.vb=2;</span><br><span class="line"> var a= new A();</span><br><span class="line"> Object.defineProperty(a, &quot;vc&quot;, &#123;value:3&#125;);</span><br><span class="line"></span><br><span class="line"> var inArr= [];</span><br><span class="line"> for(var para in a)</span><br><span class="line"> &#123;</span><br><span class="line">  inArr.push(para);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> console.log(Object.keys(a));  //  [&quot;va&quot;]</span><br><span class="line"> console.log(Object.getOwnPropertyNames(a));  //  [&quot;va&quot;, &quot;vc&quot;]</span><br><span class="line"> console.log(JSON.stringify(a));   // &#123;&quot;va&quot;:1&#125;</span><br><span class="line"> console.log(inArr);  // [&quot;va&quot;, &quot;vb&quot;]</span><br><span class="line"></span><br><span class="line">a[&quot;vc&quot;]= 8;</span><br><span class="line">console.log(a[&quot;vc&quot;]); // 3</span><br><span class="line"></span><br><span class="line">delete a[&quot;vc&quot;]; // delete将返回false</span><br><span class="line">console.log(a[&quot;vc&quot;]); // 3</span><br><span class="line"></span><br><span class="line">Object.defineProperty(a, &quot;vd&quot;, &#123;value:4, writable: true&#125;);</span><br><span class="line"></span><br><span class="line">a[&quot;vd&quot;]= 8;</span><br><span class="line">console.log(a[&quot;vd&quot;]); // 8</span><br><span class="line"></span><br><span class="line">delete a[&quot;vd&quot;]; // delete将返回false</span><br><span class="line">console.log(a[&quot;vd&quot;]); // 8</span><br><span class="line"></span><br><span class="line">Object.defineProperty(a, &quot;ve&quot;, &#123;value:4, configurable: true&#125;);</span><br><span class="line"></span><br><span class="line">delete a[&quot;ve&quot;]; // delete将返回true</span><br><span class="line">console.log(a[&quot;ve&quot;]); // undefined</span><br></pre></td></tr></table></figure><h3 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.getName = function()&#123;</span><br><span class="line">    return this.name ;</span><br><span class="line">&#125;;</span><br><span class="line">function Stuff1(name, id)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.id = id;</span><br><span class="line">&#125;</span><br><span class="line">for(var fn in Person.prototype)&#123;</span><br><span class="line">    Stuff1.prototype[fn] = Person.prototype[fn];</span><br><span class="line">&#125;</span><br><span class="line">var piupiu1 = new Stuff1(&quot;piupiu1&quot;,&quot;008&quot;);</span><br><span class="line">console.log(piupiu1.constructor === Stuff1);//打印true</span><br></pre></td></tr></table></figure><font color="blue"><br>解析:Person.prototype的三个属性(constructor,getName,__proto__)，仅有getName属性可枚举，于是Stuff1.prototype仅仅继承了“getName”属性，打印的constructor仍是自己的。<br></font>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;要点&quot;&gt;&lt;a href=&quot;#要点&quot; class=&quot;headerlink&quot; title=&quot;要点&quot;&gt;&lt;/a&gt;要点&lt;/h3&gt;&lt;p&gt;★属性的可枚举性将影响以下三个函数的结果：for…in，Object.keys()，JSON.stringify。具体来说，如果属性的enu
       
     
     </summary>
