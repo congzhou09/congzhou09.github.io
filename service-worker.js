@@ -1,4 +1,4 @@
-var VERSION = '2020-2-17 11:53:10';
+var VERSION = '2020-5-11 18:37:30';
 var CACHE_NAME_PREFIX = "congzhou-blog-cache-",
   CACHE_NAME = CACHE_NAME_PREFIX + VERSION;
 var urlsToCache = [
@@ -7,13 +7,10 @@ var urlsToCache = [
   "img/brand.jpg",
   "img/avatar.jpg",
   "css/style.css",
-  "css/fonts/fontawesome/fontawesome-webfont.woff2",
-  "css/fonts/roboto/Roboto-Medium.woff2",
-  "css/fonts/roboto/Roboto-Regular.woff2",
+  "css/fonts/iconfont/iconfont.css",
   "js/main.min.js",
   "js/search.min.js",
   "js/busuanzi.pure.min.js",
-  "js/waves.min.js",
   "archives/",
   "tags/",
   "categories/",

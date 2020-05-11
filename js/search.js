@@ -6,7 +6,6 @@
         searchIco = $('#search'),
         searchWrap = $('#search-wrap'),
         keyInput = $('#key'),
-        back = $('#back'),
         searchPanel = $('#search-panel'),
         searchResult = $('#search-result'),
         searchTpl = $('#search-tpl').innerHTML,
@@ -122,11 +121,6 @@
         searchWrap.classList.toggle('in');
         keyInput.value = '';
         searchWrap.classList.contains('in') ? keyInput.focus() : keyInput.blur();
-    });
-
-    back.addEventListener(even, function () {
-        searchWrap.classList.remove('in');
-        Control.hide();
     });
 
     document.addEventListener(even, function (e) {

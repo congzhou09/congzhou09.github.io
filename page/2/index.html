@@ -62,28 +62,28 @@
         
             <li class="waves-block waves-effect">
               <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
+                <i class="iconfont icon icon-home" style="font-size:24px;"></i>
                 主页
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/archives"  >
-                <i class="icon icon-lg icon-archive"></i>
+                <i class="iconfont icon icon-archive" style="font-size:24px;"></i>
                 归档
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
+                <i class="iconfont icon icon-tags" style="font-size:24px;"></i>
                 标签
               </a>
             </li>
         
             <li class="waves-block waves-effect">
               <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
+                <i class="iconfont icon icon-categoryselected" style="font-size:24px;"></i>
                 分类
               </a>
             </li>
@@ -96,18 +96,15 @@
     <main id="main">
       <header class="top-header" id="header">
     <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" style="text-decoration:none;" id="menu-toggle">
+          <span class="iconfont icon-menu" style="font-size:21px;font-weight:bold;"></span>
         </a>
         <div class="flex-col header-title ellipsis">Congzhou&#39;s Blog</div>
         
         <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
             <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" style="text-decoration:none;" id="search">
+                <span class="iconfont icon-search" style="font-size:24px;font-weight:bold;"></span>
             </a>
         </div>
         
@@ -133,6 +130,45 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-Docker部署前端项目"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-01 19:25:56" datetime="2019-03-01T11:25:56.000Z"  itemprop="datePublished">2019-03-01</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/practice/Docker部署前端项目.html">Docker部署前端项目</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        对于“通过nginx访问网站资源文件”形式的前端项目，有以下三种方式将项目部署到Docker容器。
+资源文件拷贝到容器方式◊假设前端发布压缩包”dist.tar.gz”内部结构是dist文件夹-&gt;index.htnl&amp;static文件夹；◊发布包同目录下创建nginx配置文件”default.conf”，例：123456789101112131415server &#123; ...
+    
+
+        <a href="/practice/Docker部署前端项目.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-Docker常用命令"
@@ -492,44 +528,6 @@
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-js的原型链、new、constructor、instanceof"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-07 19:51:05" datetime="2018-03-07T11:51:05.000Z"  itemprop="datePublished">2018-03-07</time>
-
-        
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/knowledge/js的原型链、new、constructor、instanceof.html">JS的原型链、new、constructor、instanceof</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        原型链□按照ECMAScript标准，[[Prototype]]是每个对象(包括变量和函数)都有的一个属性，它是为了实现Javascript引擎用的，因此在Javascript中不能直接访问它，为了表示特性是内部值，这里用两个方括号加以区分。□在Firefox，Safari，Chrome中，每个对象都支持一个__proto__对象，可以当做[[Prototype]]，当访问一个对象的属性时，...
-    
-
-        <a href="/knowledge/js的原型链、new、constructor、instanceof.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
@@ -562,9 +560,9 @@
 
     </main>
     <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" style="text-decoration:none;"><span class="iconfont icon-arrow-up" style="font-size:25px;font-weight:bold;"></span></a>
 
- <script src="/js/waves.min.js"></script>
+ <!-- <script src="/js/waves.min.js"></script> -->
 <script>
   var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
 
