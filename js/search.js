@@ -137,7 +137,10 @@
       {
         Control.hide();
       }
-      search(e);
+      else{
+        search(e);
+      }
+
     });
 
 }).call(this);
