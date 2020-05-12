@@ -96,7 +96,7 @@
     }
 
     function search(e) {
-        var key = this.value.trim();
+        var key = e.target.value.trim();
         if (!key) {
             return;
         }
@@ -112,24 +112,32 @@
             render(result);
             Control.show();
         });
-
-        e.preventDefault();
     }
 
 
-    searchIco.addEventListener(even, function () {
+    searchIco.addEventListener(even, function (e) {
         searchWrap.classList.toggle('in');
         keyInput.value = '';
         searchWrap.classList.contains('in') ? keyInput.focus() : keyInput.blur();
+        e.preventDefault();
     });
 
     document.addEventListener(even, function (e) {
-        if (e.target.id !== 'key' && even === 'click') {
+        if (e.target.id !== 'key') {
             Control.hide();
+        }
+        else
+        {
+          search(e);
         }
     });
 
-    keyInput.addEventListener('input', search);
-    keyInput.addEventListener(even, search);
+    keyInput.addEventListener('input', function(e){
+      if(!e.target.value)
+      {
+        Control.hide();
+      }
+      search(e);
+    });
 
 }).call(this);
