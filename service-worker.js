@@ -1,4 +1,4 @@
-var VERSION = '2020-5-13 00:06:45';
+var VERSION = '2020-5-13 14:38:53';
 var CACHE_NAME_PREFIX = "congzhou-blog-cache-",
   CACHE_NAME = CACHE_NAME_PREFIX + VERSION;
 var urlsToCache = [
