@@ -1,11 +1,11 @@
-var VERSION = '2020-5-13 14:38:53';
+var VERSION = '2020-5-13 14:50:37';
 var CACHE_NAME_PREFIX = "congzhou-blog-cache-",
   CACHE_NAME = CACHE_NAME_PREFIX + VERSION;
 var urlsToCache = [
   "/",
   "tiger.ico",
-  "img/brand.jpg",
-  "img/avatar.jpg",
+  "img/brand-loading.jpg",
+  "img/avatar-loading.jpg",
   "css/style.css",
   "css/fonts/iconfont/iconfont.css",
   "js/main.min.js",
