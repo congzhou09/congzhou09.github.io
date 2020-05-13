@@ -37,9 +37,9 @@
       <category term="实践总结" scheme="https://congzhou09.github.io/categories/practice/"/>
     
     
-      <category term="ServiceWorker" scheme="https://congzhou09.github.io/tags/ServiceWorker/"/>
-    
       <category term="webpack" scheme="https://congzhou09.github.io/tags/webpack/"/>
+    
+      <category term="ServiceWorker" scheme="https://congzhou09.github.io/tags/ServiceWorker/"/>
     
       <category term="按需加载" scheme="https://congzhou09.github.io/tags/%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/"/>
     
@@ -377,11 +377,11 @@
       <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
     
     
+      <category term="虚拟化" scheme="https://congzhou09.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+    
       <category term="Docker" scheme="https://congzhou09.github.io/tags/Docker/"/>
     
       <category term="容器" scheme="https://congzhou09.github.io/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="虚拟化" scheme="https://congzhou09.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
   </entry>
   
