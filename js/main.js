@@ -229,15 +229,6 @@
         el.addEventListener(even, wxModal.toggle);
       });
     },
-    search: function() {
-      var searchWrap = $("#search-wrap");
-
-      function toggleSearch() {
-        searchWrap.classList.toggle("in");
-      }
-
-      $("#search").addEventListener(even, toggleSearch);
-    },
     reward: function() {
       var modal = new this.modal("#reward");
       $("#rewardBtn").addEventListener(even, modal.toggle);

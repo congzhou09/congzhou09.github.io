@@ -122,12 +122,30 @@
     e.preventDefault();
   });
 
+  function closest(el, selector) {
+    var matchesSelector =
+      el.matches ||
+      el.webkitMatchesSelector ||
+      el.mozMatchesSelector ||
+      el.msMatchesSelector;
+
+    var ret = null;
+    while (el) {
+      if (matchesSelector.call(el, selector)) {
+        break;
+      }
+      ret = el = el.parentElement;
+    }
+    return ret;
+  }
+
   document.addEventListener(even, function(e) {
     if (e.target === keyInput) {
       search(e);
-    } else if (!e.path.includes($("#search-result"))) {
+    } else if (!closest(e.target, '.search-panel')) {
       Control.hide();
     }
+    e.stopPropagation();
   });
 
   keyInput.addEventListener("input", function(e) {
