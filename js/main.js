@@ -95,10 +95,12 @@
 
       // 图片懒加载
       if (!menuShowed) {
-        var brandWrapElem = $(".brand-wrap"),
+        var brandWrapElem = $(".brand-wrap-img"),
           avatarImgElem = $(".avatar img");
-        brandWrapElem.style.backgroundImage =
-          "url(" + brandWrapElem.getAttribute("finalsrc") + ")";
+        brandWrapElem.setAttribute(
+          "src",
+          brandWrapElem.getAttribute("finalsrc")
+        );
         avatarImgElem.setAttribute(
           "src",
           avatarImgElem.getAttribute("finalsrc")
