@@ -52,9 +52,11 @@
             <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Congzhou</h5>
-          <h6 class="mail">yuancongzhou@yeah.net</h6>
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
         </hgroup>
+        <div class="hint-container"></div>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
@@ -130,6 +132,46 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-通过babel搭建可使用async、await的Node.js运行环境"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-22 16:03:06" datetime="2018-03-22T08:03:06.000Z"  itemprop="datePublished">2018-03-22</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/practice/通过babel搭建可使用async、await的Node.js运行环境.html">通过babel搭建可使用async/await的Node.js运行环境</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Node.js 版本7以下 原生不支持ES6的async/await写法，通过bebel的runtime实时翻译实现async/await写法的支持，在Node.js-v6.11.0的express项目下亲测可用，具体步骤如下：
+●安装”babel-core”1npm install --save babel-core
+●安装”babel-preset-env”、”babel-runtime...
+    
+
+        <a href="/practice/通过babel搭建可使用async、await的Node.js运行环境.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-js的原型链、new、constructor、instanceof"
@@ -312,7 +354,7 @@ ngx_http_limit_req_module模块◇ngx_http_limit_req_module针对自定义的key
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，对其赋值将把全局变量的旧值覆盖掉；●在函数局部作用域内声明一个与全局变量同名的变量，则在局部...
+        要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，如果全局变量已经存在，对其赋值将把全局变量的旧值覆盖掉；●除非赋值语句，否则直接使用作用域内...
     
 
         <a href="/knowledge/js的作用域.html" class="post-more waves-effect waves-button">

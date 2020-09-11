@@ -20,7 +20,6 @@
       )
         ? "touchstart"
         : "click",
-    isWX = /micromessenger/i.test(navigator.userAgent),
     noop = function() {},
     offset = function(el) {
       var x = el.offsetLeft,
@@ -67,30 +66,14 @@
     toggleMenu: function(flag) {
       var main = $("#main");
       if (flag) {
-        // menu.classList.remove('hide');
-
-        // if (w.innerWidth < 1241) {
         mask.classList.add("in");
         menu.classList.add("show");
 
-        if (isWX) {
-          var top = rootScollTop();
-          main.classList.add("lock");
-          main.scrollTop = top;
-        } else {
-          root.classList.add("lock");
-        }
-        // }
+        root.classList.add("lock");
       } else {
         menu.classList.remove("show");
         mask.classList.remove("in");
-        if (isWX) {
-          var top = main.scrollTop;
-          main.classList.remove("lock");
-          w.scrollTo(0, top);
-        } else {
-          root.classList.remove("lock");
-        }
+        root.classList.remove("lock");
       }
 
       // 图片懒加载
@@ -554,4 +537,48 @@
       "waves-button"
     ]);
   }
+
+  var doCopyDebounce = (function() {
+    var timer = null;
+    function core(textToCopy) {
+      var maskElem = document.querySelector("#mask");
+      var textToCopyElem = document.createElement("input");
+      textToCopyElem.style.height = "0";
+      textToCopyElem.style.opacity = "0";
+      textToCopyElem.value = textToCopy;
+      maskElem.appendChild(textToCopyElem);
+      var range = document.createRange();
+      range.selectNode(textToCopyElem);
+      var selection = window.getSelection();
+      if (selection.rangeCount > 0) selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand("copy");
+      selection.removeAllRanges();
+      maskElem.removeChild(textToCopyElem);
+    }
+    return function(textToCopy) {
+      if (timer) {
+        clearTimeout(timer);
+      } else {
+        core(textToCopy);
+      }
+      timer = setTimeout(function() {
+        clearTimeout(timer);
+        timer = null;
+      }, 2000);
+    };
+  })();
+
+  document.querySelector(".mail").addEventListener("click", function(e) {
+    var hintContainerElem = document.querySelector(".hint-container");
+    var oneHintElem = document.createElement("div");
+    oneHintElem.className = "hint";
+    oneHintElem.innerHTML = "已复制";
+    hintContainerElem.appendChild(oneHintElem);
+    setTimeout(function() {
+      hintContainerElem.removeChild(oneHintElem);
+    }, 2500);
+
+    doCopyDebounce(e.currentTarget.lastElementChild.textContent);
+  });
 })(window, document);

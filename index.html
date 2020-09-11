@@ -52,9 +52,11 @@
             <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Congzhou</h5>
-          <h6 class="mail">yuancongzhou@yeah.net</h6>
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
         </hgroup>
+        <div class="hint-container"></div>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
@@ -130,6 +132,85 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-二进制浮点数的存储IEEE-754"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-13 16:32:31" datetime="2020-06-13T08:32:31.000Z"  itemprop="datePublished">2020-06-13</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/knowledge/二进制浮点数的存储IEEE-754.html">二进制浮点数的存储:IEEE-754</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        数字的二进制表示●数字的二进制表示数字13.125示例如下图，规则如下：（1）整数部分不断除以2记录余数直到商为0，将余数逆序排列作为结果；（2）小数部分不断乘以2记录去掉整数部分直到乘积小数部分结果为0，将整数部分正序排列作为结果；
+    
+
+IEEE-754的64位浮点数●JavaScript默认采用IEEE-754的64位浮点格式存储数字；●IEEE-754的64位浮点数存储方式使用...
+    
+
+        <a href="/knowledge/二进制浮点数的存储IEEE-754.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-从0-1-0-2不等于0-3想到的"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-12 13:57:05" datetime="2020-06-12T05:57:05.000Z"  itemprop="datePublished">2020-06-12</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/knowledge/从0-1-0-2不等于0-3想到的.html">从0.1+0.2不等于0.3想到的</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        二进制无法精确存储0.1♂十进制下一个简单的小数0.1，在二进制下却变成无限循环小数0.0 0011 0011 0011…进而无法精确的存储，是不是说明二进制有缺陷？♂答案是否定的：（1）小数分为有限小数、无限循环小数、无限不循环小数，其中有限小数和无限循环小数都可以转换成有理数范围内的分数形式，十进制下的0.1也就是分数1/10；（2）无论用多少进制表示小数，小数的值都是通过∑m*n^k计...
+    
+
+        <a href="/knowledge/从0-1-0-2不等于0-3想到的.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-webpack项目优雅使用ServiceWorker"
@@ -286,7 +367,7 @@ VSCode 环境配置(IDE 的配置此处只以 VSCode 为例)○ 目的是让 IDE
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-JS运行时环境-JS-Runtime-Environment"
+            <article id="post-浏览器组成与JS运行时环境"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -300,7 +381,7 @@ VSCode 环境配置(IDE 的配置此处只以 VSCode 为例)○ 目的是让 IDE
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/knowledge/JS运行时环境-JS-Runtime-Environment.html">JS运行时环境(JS Runtime Environment)</a>
+      <a class="post-title-link" href="/knowledge/浏览器组成与JS运行时环境.html">浏览器组成与JS运行时环境</a>
     </h3>
   
 
@@ -310,13 +391,10 @@ VSCode 环境配置(IDE 的配置此处只以 VSCode 为例)○ 目的是让 IDE
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        概述◆浏览器中都具有JS运行时环境(JS Runtime Environment)，而运行时环境里包含了：（1）Web API，如setTimeout、DOM、Ajax，这些API由浏览器提供，在运行时环境里可访问；（2）JS引擎，用于代码的解析与编译；（3）回调队列(Callback Queue)；（4）事件循环(Event Loop)；
+        从浏览器到 JS 运行时环境◆ 浏览器是多进程的，一般包括如下进程：（1）Browser 主进程（负责浏览器基本界面的展示与交互，子页面的创建销毁与管理，网络资源的下载管理等）；（2）渲染进程，通常说的“浏览器内核”包含在渲染进程，默认每个页面对应一个渲染进程（浏览器通常会做合并优化），负责对应页面的解析渲染与交互；（3）GPU 进程，用于 3D 绘制等；（4）第三方插件进程；◆ 渲染进程是...
     
 
-◆JS Runtime之于JS引擎的关...
-    
-
-        <a href="/knowledge/JS运行时环境-JS-Runtime-Environment.html" class="post-more waves-effect waves-button">
+        <a href="/knowledge/浏览器组成与JS运行时环境.html" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
@@ -438,85 +516,6 @@ Taro通用使用方法...
     
 
         <a href="/handbook/Apollo前端本地开发环境搭建.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-superset前端本地开发环境搭建"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-05-10 19:07:51" datetime="2019-05-10T11:07:51.000Z"  itemprop="datePublished">2019-05-10</time>
-
-        
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/handbook/superset前端本地开发环境搭建.html">superset前端本地开发环境搭建</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        项目结构superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。
-安装npm依赖包命令行进入assets目录下，执行npm install(或更快的yarn install)。
-修改webpack配置修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地...
-    
-
-        <a href="/handbook/superset前端本地开发环境搭建.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-ajax获取与操作图片二进制流并显示"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-03-21 19:48:19" datetime="2019-03-21T11:48:19.000Z"  itemprop="datePublished">2019-03-21</time>
-
-        
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/practice/ajax获取与操作图片二进制流并显示.html">ajax获取与操作图片二进制流并显示</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        业务场景为保护用户隐私，图片上传至服务器后服务器做了按位异或处理，达到无法直接通过图片链接或图片文件查看用户所上传图片内容的目的。如此就要求前端展示时对图片二进制流做相反的位操作才能展示图片内容。
-关键代码与注释此处用原生方式书写，实际应用时根据所使用ajax库的语法修改123456789101112131415161718192021const request = new XMLHttpR...
-    
-
-        <a href="/practice/ajax获取与操作图片二进制流并显示.html" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>

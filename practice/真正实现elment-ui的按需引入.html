@@ -18,9 +18,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     
-    <meta name="keywords" content="webpack,按需加载,vue,elment.ui">
+    <meta name="keywords" content="webpack,vue,elment.ui,按需加载">
     <meta name="description" content="element.ui官网文档给出的按需引入组件的说明，属于是在main.js中为Vue注册全局组件的方式，某页面即使不使用某组件也会在打包代码中包含它，如果希望某个组件仅仅在单独页面里按需引入，则可以使用本文方法。 官方方法官方方法分两步：（1）安装babel-plugin-component，修改“.babelrc”文件内容；（经验证此步骤不再需要，环境：webpack-4.18.0、vue-2">
-<meta name="keywords" content="webpack,按需加载,vue,elment.ui">
+<meta name="keywords" content="webpack,vue,elment.ui,按需加载">
 <meta property="og:type" content="article">
 <meta property="og:title" content="真正实现elment.ui的按需引入">
 <meta property="og:url" content="https://congzhou09.github.io/practice/真正实现elment-ui的按需引入.html">
@@ -57,9 +57,11 @@
             <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Congzhou</h5>
-          <h6 class="mail">yuancongzhou@yeah.net</h6>
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
         </hgroup>
+        <div class="hint-container"></div>
       </div>
     </div>
     <div class="scroll-wrap flex-col">

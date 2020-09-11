@@ -18,9 +18,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     
-    <meta name="keywords" content="ServiceWorker,webpack,按需加载">
+    <meta name="keywords" content="webpack,按需加载,ServiceWorker">
     <meta name="description" content="简介●此处将“优雅”的含义定义为两个方面：（1）应用webpack生态简化ServiceWorker的配置；（2）ServiceWorker的开关控制与相关库的按需加载；●第一方面具体是offline-plugin插件的应用；●第二方面是动态获取前端配置与webpack的Code Spliting机制的应用； offline-plugin插件的应用○webpack生态提供了offline-plug">
-<meta name="keywords" content="ServiceWorker,webpack,按需加载">
+<meta name="keywords" content="webpack,按需加载,ServiceWorker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack项目优雅使用ServiceWorker">
 <meta property="og:url" content="https://congzhou09.github.io/practice/webpack项目优雅使用ServiceWorker.html">
@@ -57,9 +57,11 @@
             <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Congzhou</h5>
-          <h6 class="mail">yuancongzhou@yeah.net</h6>
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
         </hgroup>
+        <div class="hint-container"></div>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
@@ -212,7 +214,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/knowledge/从0-1-0-2不等于0-3想到的.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="iconfont icon-arrow1l"></i> Prev</div>
+        <h4 class="title">从0.1+0.2不等于0.3想到的</h4>
+      </a>
+    </div>
   
 
   

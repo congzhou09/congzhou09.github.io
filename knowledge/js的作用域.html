@@ -19,18 +19,18 @@
     
     
     <meta name="keywords" content="javascript">
-    <meta name="description" content="要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，对其赋值将把全局变量的旧值覆盖掉；●在函数局部作用域内声明一个与全局变量同名的变量，则在局部作用域">
+    <meta name="description" content="要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，如果全局变量已经存在，对其赋值将把全局变量的旧值覆盖掉；●除非赋值语句，否则直接使用作用域内没有声">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS的作用域">
 <meta property="og:url" content="https://congzhou09.github.io/knowledge/js的作用域.html">
 <meta property="og:site_name" content="Congzhou&#39;s Blog">
-<meta property="og:description" content="要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，对其赋值将把全局变量的旧值覆盖掉；●在函数局部作用域内声明一个与全局变量同名的变量，则在局部作用域">
+<meta property="og:description" content="要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，如果全局变量已经存在，对其赋值将把全局变量的旧值覆盖掉；●除非赋值语句，否则直接使用作用域内没有声">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-11-12T12:02:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS的作用域">
-<meta name="twitter:description" content="要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，对其赋值将把全局变量的旧值覆盖掉；●在函数局部作用域内声明一个与全局变量同名的变量，则在局部作用域">
+<meta name="twitter:description" content="要点●ECMAScript作用域分为全局作用域和 以函数划分的 局部作用域；●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，如果全局变量已经存在，对其赋值将把全局变量的旧值覆盖掉；●除非赋值语句，否则直接使用作用域内没有声">
     
         <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
     
@@ -57,9 +57,11 @@
             <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Congzhou</h5>
-          <h6 class="mail">yuancongzhou@yeah.net</h6>
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
         </hgroup>
+        <div class="hint-container"></div>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
@@ -170,9 +172,8 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h4 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h4><p>●ECMAScript作用域分为全局作用域和 <strong>以函数划分的</strong> 局部作用域；<br>●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；<br>●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，对其赋值将把全局变量的旧值覆盖掉；<br>●在函数局部作用域内声明一个与全局变量同名的变量，则在局部作用域内变量值为作用域内的值，在全局作用域仍是全局作用域内的值；<br>●变量在用var声明它的函数体以及这个函数体嵌套的任意函数体内都是有定义的，而且是始终有定义，只是在var语句时才被真正赋值，变量在声明语句之前就已经可用，这种特性称为 <strong>声明提前</strong>；<br>◎ES6新支持的let声明符使JS支持花括号{}分隔的块级作用域，使用let声明的变量也支持声明提前，但在let声明语句之前使用变量将报错；</p>
-<h4 id="理解实例1："><a href="#理解实例1：" class="headerlink" title="理解实例1："></a>理解实例1：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var v = &quot;yoyo&quot;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(v); //输出“undefined”</span><br><span class="line">    var v = &quot;check now&quot;;</span><br><span class="line">    console.log(v);//输出“check now”</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p><font color="blue">解析：以上如果没有两个var的声明，将会报错”Uncaught ReferenceError: v is not defined”。</font><br></p>
+            <h4 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h4><p>●ECMAScript作用域分为全局作用域和 <strong>以函数划分的</strong> 局部作用域；<br>●ECMAScript的函数是可以嵌套的，在每个局部作用域内可以向上访问上层局部作用域直到全局作用域中的变量，但不能向下访问嵌套函数内的变量；<br>●在任何局部作用域内声明变量时如果未使用“var”前缀，则实际上声明了一个全局变量，如果全局变量已经存在，对其赋值将把全局变量的旧值覆盖掉；<br>●除非赋值语句，否则直接使用作用域内没有声明的变量将报”…… is not defined”错误；<br>●在函数局部作用域内声明一个与全局变量同名的变量，则在局部作用域内变量值为作用域内的值，在全局作用域仍是全局作用域内的值；<br>●变量在用var声明它的函数体以及这个函数体嵌套的任意函数体内都是有定义的，而且是始终有定义，只是在var语句时才被真正赋值，变量在声明语句之前就已经可用，这种特性称为 <strong>声明提前</strong>；<br>◎ES6新支持的let声明符使JS支持花括号{}分隔的块级作用域，使用let声明的变量也会声明提前，但在let声明语句之前使用变量将报错；</p>
+<h4 id="理解实例1："><a href="#理解实例1：" class="headerlink" title="理解实例1："></a>理解实例1：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var v = &quot;yoyo&quot;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(v); //输出“undefined”，局部变量v声明提前，在声明语句之前就已可用</span><br><span class="line">    var v = &quot;check now&quot;;</span><br><span class="line">    console.log(v);//输出“check now”</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 <h4 id="理解实例2："><a href="#理解实例2：" class="headerlink" title="理解实例2："></a>理解实例2：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var v = &quot;yoyo&quot;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(v); //报错： Uncaught ReferenceError: v is not defined ，代码停止执行</span><br><span class="line">    let v = &quot;check now&quot;;</span><br><span class="line">    console.log(v);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
         </div>
 

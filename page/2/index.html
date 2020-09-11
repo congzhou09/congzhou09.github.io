@@ -52,9 +52,11 @@
             <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">Congzhou</h5>
-          <h6 class="mail">yuancongzhou@yeah.net</h6>
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
         </hgroup>
+        <div class="hint-container"></div>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
@@ -130,6 +132,85 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-superset前端本地开发环境搭建"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-05-10 19:07:51" datetime="2019-05-10T11:07:51.000Z"  itemprop="datePublished">2019-05-10</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/handbook/superset前端本地开发环境搭建.html">superset前端本地开发环境搭建</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        项目结构superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。
+安装npm依赖包命令行进入assets目录下，执行npm install(或更快的yarn install)。
+修改webpack配置修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地...
+    
+
+        <a href="/handbook/superset前端本地开发环境搭建.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-ajax获取与操作图片二进制流并显示"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-21 19:48:19" datetime="2019-03-21T11:48:19.000Z"  itemprop="datePublished">2019-03-21</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/practice/ajax获取与操作图片二进制流并显示.html">ajax获取与操作图片二进制流并显示</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        业务场景为保护用户隐私，图片上传至服务器后服务器做了按位异或处理，达到无法直接通过图片链接或图片文件查看用户所上传图片内容的目的。如此就要求前端展示时对图片二进制流做相反的位操作才能展示图片内容。
+关键代码与注释此处用原生方式书写，实际应用时根据所使用ajax库的语法修改123456789101112131415161718192021const request = new XMLHttpR...
+    
+
+        <a href="/practice/ajax获取与操作图片二进制流并显示.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-Docker部署前端项目"
@@ -274,8 +355,8 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        ●虚拟化技术目前有基于虚拟机和容器两种，前者已经有数十年历史，非常的成熟；●虚拟机又分为两种，一种是直接安装在裸机上，另一种是安装在操作系统上；（1）裸机上的虚拟机，虚拟化层（图中的虚拟化软件）直接运行在系统硬件上，创建硬件全仿真实例，被称为“裸机”，也称为裸金属架构，如下图。
-                          （2）操作系统上的虚拟机，虚拟化层（图中的虚拟化软件）运行在传...
+        ●虚拟化技术目前有基于虚拟机和基于容器两种，前者已经有数十年历史，非常的成熟；●虚拟机又分为两种，一种是直接安装在裸机上，另一种是安装在操作系统上；（1）裸机上的虚拟机，虚拟化层（图中的虚拟化软件）直接运行在系统硬件上，创建硬件全仿真实例，被称为“裸机”，也称为裸金属架构，如下图。
+                          （2）操作系统上的虚拟机，虚拟化层（图中的虚拟化软件）运行...
     
 
         <a href="/knowledge/虚拟机技术知识整理.html" class="post-more waves-effect waves-button">
@@ -411,45 +492,6 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-微信小游戏的版本兼容处理"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-05-29 20:31:42" datetime="2018-05-29T12:31:42.000Z"  itemprop="datePublished">2018-05-29</time>
-
-        
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/practice/微信小游戏的版本兼容处理.html">微信小游戏的版本兼容处理</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        要点◎针对用户手中不同版本微信客户端可能不支持小游戏内使用的微信API做兼容处理；◎官方提供的方式：（1）在小游戏的后台设置（2）与版本相关的微信API；◎CocosCreator提供了打包微信小游戏的支持，但未涉及微信API的兼容处理，之后讨论使用以上方式处理兼容；
-在小游戏后台设置在小游戏后台的”设置-&gt;基本设置-&gt;基础库最低版本设置”可以设置最低基础库版本，微信客户端会检查...
-    
-
-        <a href="/practice/微信小游戏的版本兼容处理.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-js的继承"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -475,50 +517,10 @@
 
     
         要点●ECMAScript中的继承机制没有明确规定，是通过模仿来实现的；
-对象冒充（object masquerading），也称为借用构造函数■通过Function对象的”call()”方法实现，”call()”方法的第一个参数用作 this 的对象，其他参数都作为函数参数直接传递给函数自身，例如：1234567891011121314function ClassA(sColor) &#1...
+对象冒充（object masquerading）■”对象冒充”也称为”借用构造函数”，通过Function对象的”call()”方法实现，”call()”方法的第一个参数用作 this 的对象，其他参数都作为函数参数直接传递给函数自身，例如：1234567891011121314function ClassA(sCo...
     
 
         <a href="/knowledge/js的继承.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-通过babel搭建可使用async、await的Node.js运行环境"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-22 16:03:06" datetime="2018-03-22T08:03:06.000Z"  itemprop="datePublished">2018-03-22</time>
-
-        
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/practice/通过babel搭建可使用async、await的Node.js运行环境.html">通过babel搭建可使用async/await的Node.js运行环境</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        Node.js 版本7以下 原生不支持ES6的async/await写法，通过bebel的runtime实时翻译实现async/await写法的支持，在Node.js-v6.11.0的express项目下亲测可用，具体步骤如下：
-●安装”babel-core”1npm install --save babel-core
-●安装”babel-preset-env”、”babel-runtime...
-    
-
-        <a href="/practice/通过babel搭建可使用async、await的Node.js运行环境.html" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
