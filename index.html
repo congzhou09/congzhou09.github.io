@@ -37,11 +37,24 @@
     
 
     
+
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.6.1/dist/av-min.js"></script>
+    <script src="/js/util.min.js"></script>
 </head>
 
   <body>
+
+    <script>
+      var VISIT_INFO = {};
+      defineObserveVar(VISIT_INFO, 'totalPV');
+      defineObserveVar(VISIT_INFO, 'curPagePV');
+      defineObserveVar(VISIT_INFO, 'totalUV');
+    </script>
+
     <div id="loading" class="active"></div>
- <!--class="hide"-->
+
+
+    <!--class="hide"-->
 <aside id="menu">
   <div class="inner flex-row-vertical">
     
@@ -132,6 +145,45 @@
 <div class="container body-wrap">
 
     <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-Java-web-技术与架构演进历史"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-09-30 14:46:35" datetime="2020-09-30T06:46:35.000Z"  itemprop="datePublished">2020-09-30</time>
+
+        
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/knowledge/Java-web-技术与架构演进历史.html">Java web 技术与架构演进历史</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        梳理 Java web 相关的技术与架构演进历史，附带可运行demo，以期从历史发展角度看到各个技术点产生的背景与目的，加深对服务端技术栈的了解；
+Servlet○Servlet技术诞生用于使web服务器能够提供静态资源之外的动态内容，是扩展了Web服务器能力的Java软件组件；○Servlet的运行依赖于Servlet容器（如Tomcat、Jetty）；○Servlet容器提供了遵循Ser...
+    
+
+        <a href="/knowledge/Java-web-技术与架构演进历史.html" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    
+</article>
+
+        </li>
     
         <li class="post-list-item fade">
             <article id="post-进程、线程、纤程、协程"
@@ -484,49 +536,6 @@ VSCode 环境配置(IDE 的配置此处只以 VSCode 为例)○ 目的是让 IDE
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-Taro使用与开发钉钉小程序"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-08-02 15:02:50" datetime="2019-08-02T07:02:50.000Z"  itemprop="datePublished">2019-08-02</time>
-
-        
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/practice/Taro使用与开发钉钉小程序.html">Taro使用与开发钉钉小程序</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        选择Taro前的考虑■钉钉于2019年6月中旬升级原“E应用”为“小程序”，同时升级了小程序开发者工具，可以兼容阿里巴巴旗下手淘、支付宝等不同产品的运行环境钉钉小程序；
-■根据官方说明，E应用和支付宝小程序使用相同的小程序通用框架，支持通用组件和API，然后分别有自己扩展的组件和API，如下图；
-    
-
-■Taro支持开发支付宝小程序，进而可以支持钉钉小程序的开发；
-Taro通用使用方法...
-    
-
-        <a href="/practice/Taro使用与开发钉钉小程序.html" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
@@ -544,15 +553,18 @@ Taro通用使用方法...
             <span>Copyright &copy; 2009-2020</span>
 
             
+
             
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        总访客数：<span id="busuanzi_value_site_uv"></span>
+              
+    <span id="container_site_uv" style='display:none'>
+        总访客数：<span id="value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        总访问量：<span id="busuanzi_value_site_pv"></span>
+    <span id="container_site_pv" style='display:none'>
+        总访问量：<span id="value_site_pv"></span>
     </span>
 
 
+            
         </p>
     </div>
 </footer>
@@ -561,17 +573,17 @@ Taro通用使用方法...
     <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" style="text-decoration:none;"><span class="iconfont icon-arrow-up" style="font-size:25px;font-weight:bold;"></span></a>
 
- <!-- <script src="/js/waves.min.js"></script> -->
+
+
+    <!-- <script src="/js/waves.min.js"></script> -->
 <script>
   var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
-
   
-
-  lazyScripts.push('/js/busuanzi.pure.min.js');
 </script>
 
 <script src="/js/main.min.js"></script>
- 
+
+  
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
@@ -589,30 +601,122 @@ Taro通用使用方法...
 </li>
 </template>
 
-<script src="/js/search.min.js"></script>
- 
- 
- 
+  <script src="/js/search.min.js"></script>
 
+
+
+
+
+
+
+
+<script>
+  // 基于LearnCloud的 pv|uv|阅读量
+  
+    
+      AV.init({
+        appId: "tq4lHkryFNXHsw9SOypjPRwx-gzGzoHsz",
+        appKey: "lFmuObNsezjTPj5e86R1TgOg",
+        serverURL: "https://avoscloud.com"
+      });
+    
+
+    
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_pv");
+      pvElem.innerText = VISIT_INFO.totalPV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalPV;
+    Observer.callback = null;
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_uv");
+      pvElem.innerText = VISIT_INFO.totalUV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalUV;
+    Observer.callback = null;
+
+    // lazyScripts.push({url: '/js/visit_count.min.js', async: false});
+    setTimeout(function() {
+  var VisitPV = AV.Object.extend("visit_pv");
+  var VisitUV = AV.Object.extend("visit_uv");
+
+  // 记录pv
+  var queryPV = new AV.Query(VisitPV);
+  var pathName = location.pathname;
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryPV.equalTo("url", pathName);
+    queryPV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        VISIT_INFO.curPagePV = theRecord.get("times");
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        VISIT_INFO.curPagePV = 0;
+        var newRecord = new VisitPV();
+        newRecord.set("url", pathName);
+        newRecord.set("times", 1);
+        
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+
+  // 调用云函数获取pv总数
+  AV.Cloud.run('total_pv',{remote:true}).then(data=>{
+    VISIT_INFO.totalPV = data;
+  })
+
+  // 记录uv
+  var curUID = localStorage.getItem("blog_UID");
+  if (!curUID) {
+    curUID = generateUID();
+    localStorage.setItem("blog_UID", generateUID());
+  }
+  var queryUV = new AV.Query(VisitUV);
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryUV.equalTo("UID", curUID);
+    queryUV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        var newRecord = new VisitUV();
+        newRecord.set("UID", curUID);
+        newRecord.set("times", 1);
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+  // 查询总访客数
+  queryUV = new AV.Query(VisitUV);
+  queryUV.count().then(function(totalUV) {
+    var baseUV = 1998;// 追加上之前近3年由不蒜子统计的大概数量
+    VISIT_INFO.totalUV = totalUV + baseUV;
+  });
+}, 100);
+
+
+  
+</script>
 
 
     
 
     <script>
-      //访问config.host的数据统计
-      // if (
-      //   typeof TDGA !== "undefined" &&
-      //   "congzhou09.github.io" === location.hostname
-      // ) {
-      //   TDGA.Account({
-      //     accountId: sessionStorage.getItem("__TD_sessionId")
-      //   });
-
-      //   TDGA.onEvent("visit", {
-      //     destination: location.hostname,
-      //     referrer: document.referrer
-      //   });
-      // }
       //service-worker
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

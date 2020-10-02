@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://congzhou09.github.io/"/>
-  <updated>2020-09-25T14:36:52.742Z</updated>
+  <updated>2020-10-01T13:16:30.595Z</updated>
   <id>https://congzhou09.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java web 技术与架构演进历史</title>
+    <link href="https://congzhou09.github.io/knowledge/Java-web-%E6%8A%80%E6%9C%AF%E4%B8%8E%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B%E5%8E%86%E5%8F%B2.html"/>
+    <id>https://congzhou09.github.io/knowledge/Java-web-技术与架构演进历史.html</id>
+    <published>2020-09-30T06:46:35.000Z</published>
+    <updated>2020-10-01T13:16:30.595Z</updated>
+    
+    <content type="html"><![CDATA[<p>梳理 Java web 相关的技术与架构演进历史，附带可运行demo，以期从历史发展角度看到各个技术点产生的背景与目的，加深对服务端技术栈的了解；</p><h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><p>○Servlet技术诞生用于使web服务器能够提供静态资源之外的动态内容，是扩展了Web服务器能力的Java软件组件；<br>○Servlet的运行依赖于Servlet容器（如Tomcat、Jetty）；<br>○Servlet容器提供了遵循Servlet规范的接口，开发者实现自Servlet接口的Java类就称为一个Servlet，在Servlet中定义用于响应请求的具体动态内容；<br>○在Servlet容器的配置中指定请求URL与处理请求的Servlet的映射关系，如Tomcat配置文件位于”/WEB-INF/web.xml”，映射关系内容示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; ...&gt;</span><br><span class="line">&lt;web-app ...&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;servlet1&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;servletClass1&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line"></span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;servlet2&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;servletClass2&lt;/servlet-class&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;servlet1&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/url1&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;servlet2&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/url2&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure></p><p>○Servlet处理客户端请求流程：<br>（1）客户端请求到达Servlet容器，Servlet容器解析请求信息创建相应的”HttpServletRequest”和”HttpServletResponse”对象；<br>（2）Servlet容器根据请求URL映射配置创建或找到对应的Servlet实例，创建一个线程并传入“HttpServletRequest”与“HttpServletResponse”对象，再调用Servlet实例的service()方法；<br>（3）Servlet对象的doGet()、doPost()等方法处理请求，返回内容交由Servlet容器组装成HTTP格式返回给客户端；<br>○demo地址：<a href="https://github.com/congzhou09/servlet_maven_demo" target="_blank" rel="noopener">servlet_maven_demo</a></p><h3 id="JSP-Java-Server-Pages"><a href="#JSP-Java-Server-Pages" class="headerlink" title="JSP(Java Server Pages)"></a>JSP(Java Server Pages)</h3><p>○由于Servlet编写前端内容太繁琐，sun公司又推出了JSP；<br>○JSP文件放到Servlet容器的web目录下；<br>○客户端可直接请求JSP文件，得到的内容不是JSP原文件而是其中Java代码被执行后的内容；<br>○Servlet处理请求的返回内容也可以是一个JSP文件；<br>○demo地址同上：<a href="https://github.com/congzhou09/servlet_maven_demo" target="_blank" rel="noopener">servlet_maven_demo</a></p><h3 id="JSP-Model1第一代"><a href="#JSP-Model1第一代" class="headerlink" title="JSP Model1第一代"></a>JSP Model1第一代</h3><p>○JavaWeb早期的模型，它适合小型Web项目，开发成本低。服务器端只有JSP页面，所有的操作都在JSP页面中，连访问数据库的API也在JSP页面中完成；</p><div class="img-container" style="width: 70%;"><br>    <img src="/knowledge/Java-web-技术与架构演进历史/jsp_model1_1.png"><br></div><h3 id="JSP-Model1第二代"><a href="#JSP-Model1第二代" class="headerlink" title="JSP Model1第二代"></a>JSP Model1第二代</h3><p>○将业务逻辑内容放到JavaBean，JSP页面负责显示以及请求调度。虽然第二代比第一代好了些，但JSP仍然做了过多的工作，它耦合了视图工作和请求调度（控制器）的工作；</p><div class="img-container" style="width: 70%;"><br>    <img src="/knowledge/Java-web-技术与架构演进历史/jsp_model1_2.png"><br></div><h3 id="JSP-Model2"><a href="#JSP-Model2" class="headerlink" title="JSP Model2"></a>JSP Model2</h3><p>○Servlet与JSP之间可以共享数据，JSP Model2模式将Servlet与JSP结合使用，做了初级的MVC分层：<br>（1）JSP：视图层，用来与用户打交道。负责接收用户的数据，以及显示数据给用户；<br>（2）Servlet：控制层，负责找到合适的模型对象来处理业务逻辑，根据处理结果找到合适的JSP页面对用户进行响应；<br>（3）JavaBean：模型层，完成具体的业务数据处理工作；</p><div class="img-container" style="width: 60%;"><br>    <img src="/knowledge/Java-web-技术与架构演进历史/jsp_model2.png"><br></div><h3 id="Struts框架（以Struts2为准）"><a href="#Struts框架（以Struts2为准）" class="headerlink" title="Struts框架（以Struts2为准）"></a>Struts框架（以Struts2为准）</h3><p>◇Struts目的是使视图和业务逻辑清晰的分离，提高开发效率，显著特点如下：<br>（1）提供Action机制来处理业务逻辑；<br>（2）提供了一套可在JSP中使用的标签，方便在Action与JSP之间共享数据；<br>◇Struts提供的action机制的实现基于Servlet的Filter，相当于扩展了的Filter，也就是Filter是Struts框架的入口，Struts根据客户端请求及映射配置(struts-config.xml)实例化对应的action和调用其方法处理业务与数据，根据方法返回值及映射配置跳转到对应JSP页面或其他网络资源或另一个action；</p><div class="img-container" style="width: 80%;"><br>    <img src="/knowledge/Java-web-技术与架构演进历史/struts_workflow.png"><br></div><p>◇action相对于Servlet的优点：<br>（1）action不再继承于Servlet从而使业务处理与Servlet API解耦更易于测试；<br>（2）每个请求对应一个action实例，相比Servlet的同一个URL的多个请求共用一个Servlet对象是线程安全的；<br>◇互联网曾经出现很多<em>.do网址的JSP网站而不是</em>.jsp，这通常由于每个.do对应一个action，当action处理完一系列的业务逻辑后，即使forward到JSP页面返回给浏览器，浏览器的地址栏中显示的仍然是最初请求的*.do的action地址；<br>◇demo地址：<a href="https://github.com/congzhou09/struts2_maven_demo" target="_blank" rel="noopener">struts2_maven_demo</a></p><h3 id="Javaweb经典三层架构"><a href="#Javaweb经典三层架构" class="headerlink" title="Javaweb经典三层架构"></a>Javaweb经典三层架构</h3><p>◇Struts项目中为避免所有的运算逻辑都放在Action导致 Action类复用度低和逻辑混乱，通常让action（仍属于Servlet范畴）只负责显示，与JSP共同组成表现层（web层），独立出一层业务层（service层）负责具体业务运算逻辑供Action调用，然后通过JDBC调用持久层完成数据库的读写的部分独立成数据访问层（dao层）供业务层使用，由此形成了经典三层架构；<br>○业务层中不包含JavaWeb API而只关心业务逻辑，数据层只关心对数据库的访问细节而不涉及具体业务逻辑，提高了代码的可重用性；<br>○MVC定位为表现层的设计模式；</p><div class="img-container" style="width: 60%;"><br>    <img src="/knowledge/Java-web-技术与架构演进历史/three_tier_architecture.png"><br></div><h3 id="Hibernate框架"><a href="#Hibernate框架" class="headerlink" title="Hibernate框架"></a>Hibernate框架</h3><p>◆Hibernate是个ORM（Object Relational Mapping，即对象关系映射）框架，通过创建持久化类来对应数据库中表属性及关联关系，然后通过操作持久化对象就能达到操作数据库的目的，而不需要与SQL语句打交道，大大降低了原JDBC方式的编程量；<br>◆Hibernate原理是对JDBC进行了封装，并能自动生成SQL语句；</p><h3 id="Spring框架"><a href="#Spring框架" class="headerlink" title="Spring框架"></a>Spring框架</h3><p>■Spring框架（Spring framwork，简称Spring）是一个JavaSE/EE全栈开源框架，它从设计上就是分层分模块的架构，可以将对应模块功能的子框架整合到体系中；<br>■Spring带来的最显著改变：在Spring之前，web层调用业务层、业务层调用持久层都是通过调用者new出被调用者的方式，之间强耦合、复用率低，Spring通过其核心特性IoC实现强依赖的解耦，由Spring完成被调用者的new实例化并将其注入给依赖者；<br>●demo地址：<a href="https://github.com/congzhou09/spring_maven_demo" target="_blank" rel="noopener">spring_maven_demo</a></p><h3 id="SSH-Spring-Struts-Hibernate-框架"><a href="#SSH-Spring-Struts-Hibernate-框架" class="headerlink" title="SSH(Spring-Struts-Hibernate)框架"></a>SSH(Spring-Struts-Hibernate)框架</h3><p>●Spring框架整合了Struts和Hibernate，形成了SSH这个合成框架；<br>●SSH框架中，Struts负责表示层，Hibernate负责持久层，Spring负责中间业务层并通过IoC特性实现了对表示层与持久层的黏合；</p><h3 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h3><p>●Spring开发者逐渐发现Struts存在设计缺陷，会导致性能、安全、减少配置复杂度、开发效率等方面的不足，遂开发了自己的MVC框架：SpringMVC；<br>●SpringMVC接受请求的入口是 DispatcherServlet ，不同于Struts基于Servlet的Filter，它是派生自HttpServlet的一个Servlet，请求会交付给对应的Controller做处理；<br>●SpringMVC的因其更清晰的层级分离、更强大直接的配置等优势逐渐成为Spring Web模块的主流子框架；<br>●demo地址：<a href="https://github.com/congzhou09/spring_maven_demo" target="_blank" rel="noopener">spring_maven_demo</a></p><h3 id="SSM-Spring-SpringMVC-MyBatis-框架"><a href="#SSM-Spring-SpringMVC-MyBatis-框架" class="headerlink" title="SSM(Spring-SpringMVC-MyBatis)框架"></a>SSM(Spring-SpringMVC-MyBatis)框架</h3><p>△SSM框架分别用SpringMVC和MyBatis替代SSH框架中的Struts和Hibernate，MyBatis适用于数据源复杂度较低的场景；</p><h3 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h3><p>●Spring Boot是对Spring工作流层面的演进，实现基于Spring的更便捷的生产级别应用；<br>●Spring Boot的优点：<br>（1）内嵌Servlet容器，独立运行的Spring项目，Spring Boot可以内嵌Tomcat，以java -jar xx.jar包的形式来运行一个Spring Boot应用，省略了war包部署的繁琐；<br>（2）提供starter机制简化Maven依赖管理与Spring配置，如仅需要引入“spring-boot-starter-web”就可以包含Spring和SpringMVC相关的依赖和配置；<br>●demo地址：<a href="https://github.com/congzhou09/springboot_maven_demo" target="_blank" rel="noopener">springboot_maven_demo</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;梳理 Java web 相关的技术与架构演进历史，附带可运行demo，以期从历史发展角度看到各个技术点产生的背景与目的，加深对服务端技术栈的了解；&lt;/p&gt;
+&lt;h3 id=&quot;Servlet&quot;&gt;&lt;a href=&quot;#Servlet&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
+    
+    
+      <category term="Java" scheme="https://congzhou09.github.io/tags/Java/"/>
+    
+      <category term="服务器" scheme="https://congzhou09.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>进程、线程、纤程、协程</title>
@@ -320,9 +348,9 @@
     <link href="https://congzhou09.github.io/handbook/superset%E5%89%8D%E7%AB%AF%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.html"/>
     <id>https://congzhou09.github.io/handbook/superset前端本地开发环境搭建.html</id>
     <published>2019-05-10T11:07:51.000Z</published>
-    <updated>2020-02-04T06:23:30.734Z</updated>
+    <updated>2020-09-27T12:58:16.126Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。</p><h3 id="安装npm依赖包"><a href="#安装npm依赖包" class="headerlink" title="安装npm依赖包"></a>安装npm依赖包</h3><p>命令行进入assets目录下，执行npm install(或更快的yarn install)。</p><h3 id="修改webpack配置"><a href="#修改webpack配置" class="headerlink" title="修改webpack配置"></a>修改webpack配置</h3><p>修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地址为172.16.2.249，则写为如下形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proxy: &#123;</span><br><span class="line">      context: () =&gt; true,</span><br><span class="line">      &apos;/&apos;: `http://172.16.1.119:$&#123;supersetPort&#125;`,</span><br><span class="line">      target: `http://172.16.1.119:$&#123;supersetPort&#125;`,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure></p><h3 id="启动本地调试"><a href="#启动本地调试" class="headerlink" title="启动本地调试"></a>启动本地调试</h3><p>在assets目录下命令行执行：npm run dev-server</p><h3 id="windows环境下webpack打包"><a href="#windows环境下webpack打包" class="headerlink" title="windows环境下webpack打包"></a>windows环境下webpack打包</h3><p>windows下执行“npm run build”报错”无法识别NODE_ENV”，解决办法：安装”cross-env”之后，重新执行“npm run build”，即可正常生成打包文件在dist文件夹中</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>superset项目包含前端后台部分，前端部分位于路径“/superset/assets”下。</p><h3 id="安装npm依赖包"><a href="#安装npm依赖包" class="headerlink" title="安装npm依赖包"></a>安装npm依赖包</h3><p>命令行进入assets目录下，执行npm install(或更快的yarn install)。</p><h3 id="修改webpack配置"><a href="#修改webpack配置" class="headerlink" title="修改webpack配置"></a>修改webpack配置</h3><p>修改webpack配置文件“superset/assets/webpack.config.js”，其中的proxy改为联调后台服务器的地址，例如服务器ip地址为172.16.2.249，则写为如下形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proxy: &#123;</span><br><span class="line">      context: () =&gt; true,</span><br><span class="line">      &apos;/&apos;: `http://172.16.1.119:$&#123;supersetPort&#125;`,</span><br><span class="line">      target: `http://172.16.1.119:$&#123;supersetPort&#125;`,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure></p><h3 id="启动本地调试"><a href="#启动本地调试" class="headerlink" title="启动本地调试"></a>启动本地调试</h3><p>在assets目录下命令行执行：npm run dev-server</p><h3 id="windows环境下webpack打包"><a href="#windows环境下webpack打包" class="headerlink" title="windows环境下webpack打包"></a>windows环境下webpack打包</h3><p>windows下执行“npm run build”报错”无法识别NODE_ENV”，解决办法：安装”cross-env”之后，重新执行“npm run build”，即可正常生成打包文件在dist文件夹中</p><h3 id="2020年9月补充"><a href="#2020年9月补充" class="headerlink" title="2020年9月补充"></a>2020年9月补充</h3><p>●后来开发中发现这样配置之后前端收到的网页内容仍然是从服务器返回的，此方式未被使用；<br>●superset项目新版本已经明确前后端分离并在文档中给出了前端独立调试的方法；</p>]]></content>
     
     <summary type="html">
     
@@ -454,11 +482,11 @@
       <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
     
     
+      <category term="虚拟化" scheme="https://congzhou09.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
+    
       <category term="Docker" scheme="https://congzhou09.github.io/tags/Docker/"/>
     
       <category term="容器" scheme="https://congzhou09.github.io/tags/%E5%AE%B9%E5%99%A8/"/>
-    
-      <category term="虚拟化" scheme="https://congzhou09.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
   </entry>
   
@@ -544,32 +572,6 @@
       <category term="dingtalk" scheme="https://congzhou09.github.io/tags/dingtalk/"/>
     
       <category term="钉钉" scheme="https://congzhou09.github.io/tags/%E9%92%89%E9%92%89/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用talkingdata在web项目中采集数据</title>
-    <link href="https://congzhou09.github.io/handbook/%E4%BD%BF%E7%94%A8talkingdata%E5%9C%A8web%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%87%87%E9%9B%86%E6%95%B0%E6%8D%AE.html"/>
-    <id>https://congzhou09.github.io/handbook/使用talkingdata在web项目中采集数据.html</id>
-    <published>2018-08-02T02:52:54.000Z</published>
-    <updated>2020-02-04T06:23:30.736Z</updated>
-    
-    <content type="html"><![CDATA[<p>Web项目中使用talkingdata的”游戏运营分析”步骤如下：<br>◆登录系统，进入“GameAnalytics游戏运营分析”；</p><div class="img-container" style="width: 87%;"><br><img src="/handbook/使用talkingdata在web项目中采集数据/game_analytics.png" title="图1"><br>图1 “游戏运营分析”入口<br></div><p>◆创建产品，得到App Id ；</p><div class="img-container" style="width: 87%;"><br><img src="/handbook/使用talkingdata在web项目中采集数据/app_id.png" title="图2"><br>图2 填写产品信息完成创建，得到App Id<br></div><p>◆web页面中添加script标签；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//对于普通的http连接网站，使用的调用地址：</span><br><span class="line">&lt;script src=&quot;http://sdk.talkingdata.com/g/h5/v1/您的APPID&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br><span class="line">//如果您的网站使用https连接，请使用以下地址：</span><br><span class="line">&lt;script src=&quot;https://h5.talkingdata.com/g/h5/v1/您的APPID&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p><p>◆调用如下两个函数，完成调试与数据统计；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//标识账户</span><br><span class="line">TDGA.Account(&#123;</span><br><span class="line">    accountId: 标识账户的ID</span><br><span class="line">&#125;);</span><br><span class="line">//标识事件</span><br><span class="line">TDGA.onEvent(&apos;事件名称&apos;, &#123;</span><br><span class="line">    事件参数: 事件参数值</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Web项目中使用talkingdata的”游戏运营分析”步骤如下：&lt;br&gt;◆登录系统，进入“GameAnalytics游戏运营分析”；&lt;/p&gt;
-&lt;div class=&quot;img-container&quot; style=&quot;width: 87%;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/han
-      
-    
-    </summary>
-    
-      <category term="操作手册" scheme="https://congzhou09.github.io/categories/handbook/"/>
-    
-    
-      <category term="talkingdata" scheme="https://congzhou09.github.io/tags/talkingdata/"/>
     
   </entry>
   

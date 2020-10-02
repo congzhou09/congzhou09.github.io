@@ -37,11 +37,24 @@
     
 
     
+
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.6.1/dist/av-min.js"></script>
+    <script src="/js/util.min.js"></script>
 </head>
 
   <body>
+
+    <script>
+      var VISIT_INFO = {};
+      defineObserveVar(VISIT_INFO, 'totalPV');
+      defineObserveVar(VISIT_INFO, 'curPagePV');
+      defineObserveVar(VISIT_INFO, 'totalUV');
+    </script>
+
     <div id="loading" class="active"></div>
- <!--class="hide"-->
+
+
+    <!--class="hide"-->
 <aside id="menu">
   <div class="inner flex-row-vertical">
     
@@ -129,39 +142,39 @@
             ">全部</a>
         
 
-            <a href="/tags/apollo/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">apollo</a>
+            <a href="/tags/虚拟化/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">虚拟化</a>
 
         
 
-            <a href="/tags/前端/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light">前端</a>
+            <a href="/tags/Docker/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light">Docker</a>
 
         
 
-            <a href="/tags/开发环境/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">开发环境</a>
+            <a href="/tags/容器/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">容器</a>
 
         
 
-            <a href="/tags/Docker/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">Docker</a>
+            <a href="/tags/操作手册/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">操作手册</a>
 
         
 
-            <a href="/tags/容器/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">容器</a>
+            <a href="/tags/前端项目/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">前端项目</a>
 
         
 
-            <a href="/tags/操作手册/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">操作手册</a>
+            <a href="/tags/web项目/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">web项目</a>
 
         
 
-            <a href="/tags/虚拟化/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">虚拟化</a>
+            <a href="/tags/apollo/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">apollo</a>
 
         
 
-            <a href="/tags/二进制流/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">二进制流</a>
+            <a href="/tags/前端/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">前端</a>
 
         
 
-            <a href="/tags/位操作/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">位操作</a>
+            <a href="/tags/开发环境/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">开发环境</a>
 
         
 
@@ -181,19 +194,19 @@
 
         
 
-            <a href="/tags/前端项目/" style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">前端项目</a>
+            <a href="/tags/React-Native/" style="-webkit-order:13;order:13" class="tags-list-item waves-effect waves-button waves-light">React Native</a>
 
         
 
-            <a href="/tags/web项目/" style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">web项目</a>
+            <a href="/tags/Expo/" style="-webkit-order:14;order:14" class="tags-list-item waves-effect waves-button waves-light">Expo</a>
 
         
 
-            <a href="/tags/React-Native/" style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">React Native</a>
+            <a href="/tags/二进制流/" style="-webkit-order:15;order:15" class="tags-list-item waves-effect waves-button waves-light">二进制流</a>
 
         
 
-            <a href="/tags/Expo/" style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">Expo</a>
+            <a href="/tags/位操作/" style="-webkit-order:16;order:16" class="tags-list-item waves-effect waves-button waves-light">位操作</a>
 
         
 
@@ -201,11 +214,11 @@
 
         
 
-            <a href="/tags/superset/" style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">superset</a>
+            <a href="/tags/nginx/" style="-webkit-order:18;order:18" class="tags-list-item waves-effect waves-button waves-light">nginx</a>
 
         
 
-            <a href="/tags/nginx/" style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">nginx</a>
+            <a href="/tags/superset/" style="-webkit-order:19;order:19" class="tags-list-item waves-effect waves-button waves-light">superset</a>
 
         
 
@@ -233,43 +246,51 @@
 
         
 
-            <a href="/tags/协程/" style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">协程</a>
+            <a href="/tags/浏览器/" style="-webkit-order:26;order:26" class="tags-list-item waves-effect waves-button waves-light">浏览器</a>
 
         
 
-            <a href="/tags/浏览器/" style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">浏览器</a>
+            <a href="/tags/JS引擎/" style="-webkit-order:27;order:27" class="tags-list-item waves-effect waves-button waves-light">JS引擎</a>
 
         
 
-            <a href="/tags/JS引擎/" style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">JS引擎</a>
+            <a href="/tags/Node-js/" style="-webkit-order:28;order:28" class="tags-list-item waves-effect waves-button waves-light">Node.js</a>
 
         
 
-            <a href="/tags/dingtalk/" style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">dingtalk</a>
+            <a href="/tags/虚拟机/" style="-webkit-order:29;order:29" class="tags-list-item waves-effect waves-button waves-light">虚拟机</a>
 
         
 
-            <a href="/tags/钉钉/" style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">钉钉</a>
+            <a href="/tags/协程/" style="-webkit-order:30;order:30" class="tags-list-item waves-effect waves-button waves-light">协程</a>
 
         
 
-            <a href="/tags/Node-js/" style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">Node.js</a>
+            <a href="/tags/vue/" style="-webkit-order:31;order:31" class="tags-list-item waves-effect waves-button waves-light">vue</a>
 
         
 
-            <a href="/tags/虚拟机/" style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">虚拟机</a>
+            <a href="/tags/elment-ui/" style="-webkit-order:32;order:32" class="tags-list-item waves-effect waves-button waves-light">elment.ui</a>
 
         
 
-            <a href="/tags/git/" style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">git</a>
+            <a href="/tags/dingtalk/" style="-webkit-order:33;order:33" class="tags-list-item waves-effect waves-button waves-light">dingtalk</a>
 
         
 
-            <a href="/tags/vue/" style="-webkit-order:34;order:34" class="tags-list-item waves-effect waves-button waves-light">vue</a>
+            <a href="/tags/钉钉/" style="-webkit-order:34;order:34" class="tags-list-item waves-effect waves-button waves-light">钉钉</a>
 
         
 
-            <a href="/tags/elment-ui/" style="-webkit-order:35;order:35" class="tags-list-item waves-effect waves-button waves-light">elment.ui</a>
+            <a href="/tags/git/" style="-webkit-order:35;order:35" class="tags-list-item waves-effect waves-button waves-light">git</a>
+
+        
+
+            <a href="/tags/Java/" style="-webkit-order:36;order:36" class="tags-list-item waves-effect waves-button waves-light">Java</a>
+
+        
+
+            <a href="/tags/服务器/" style="-webkit-order:37;order:37" class="tags-list-item waves-effect waves-button waves-light">服务器</a>
 
         
     </nav>
@@ -400,15 +421,18 @@
             <span>Copyright &copy; 2009-2020</span>
 
             
+
             
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        总访客数：<span id="busuanzi_value_site_uv"></span>
+              
+    <span id="container_site_uv" style='display:none'>
+        总访客数：<span id="value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        总访问量：<span id="busuanzi_value_site_pv"></span>
+    <span id="container_site_pv" style='display:none'>
+        总访问量：<span id="value_site_pv"></span>
     </span>
 
 
+            
         </p>
     </div>
 </footer>
@@ -417,17 +441,17 @@
     <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" style="text-decoration:none;"><span class="iconfont icon-arrow-up" style="font-size:25px;font-weight:bold;"></span></a>
 
- <!-- <script src="/js/waves.min.js"></script> -->
+
+
+    <!-- <script src="/js/waves.min.js"></script> -->
 <script>
   var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
-
   
-
-  lazyScripts.push('/js/busuanzi.pure.min.js');
 </script>
 
 <script src="/js/main.min.js"></script>
- 
+
+  
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
@@ -445,30 +469,122 @@
 </li>
 </template>
 
-<script src="/js/search.min.js"></script>
- 
- 
- 
+  <script src="/js/search.min.js"></script>
 
+
+
+
+
+
+
+
+<script>
+  // 基于LearnCloud的 pv|uv|阅读量
+  
+    
+      AV.init({
+        appId: "tq4lHkryFNXHsw9SOypjPRwx-gzGzoHsz",
+        appKey: "lFmuObNsezjTPj5e86R1TgOg",
+        serverURL: "https://avoscloud.com"
+      });
+    
+
+    
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_pv");
+      pvElem.innerText = VISIT_INFO.totalPV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalPV;
+    Observer.callback = null;
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_uv");
+      pvElem.innerText = VISIT_INFO.totalUV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalUV;
+    Observer.callback = null;
+
+    // lazyScripts.push({url: '/js/visit_count.min.js', async: false});
+    setTimeout(function() {
+  var VisitPV = AV.Object.extend("visit_pv");
+  var VisitUV = AV.Object.extend("visit_uv");
+
+  // 记录pv
+  var queryPV = new AV.Query(VisitPV);
+  var pathName = location.pathname;
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryPV.equalTo("url", pathName);
+    queryPV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        VISIT_INFO.curPagePV = theRecord.get("times");
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        VISIT_INFO.curPagePV = 0;
+        var newRecord = new VisitPV();
+        newRecord.set("url", pathName);
+        newRecord.set("times", 1);
+        
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+
+  // 调用云函数获取pv总数
+  AV.Cloud.run('total_pv',{remote:true}).then(data=>{
+    VISIT_INFO.totalPV = data;
+  })
+
+  // 记录uv
+  var curUID = localStorage.getItem("blog_UID");
+  if (!curUID) {
+    curUID = generateUID();
+    localStorage.setItem("blog_UID", generateUID());
+  }
+  var queryUV = new AV.Query(VisitUV);
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryUV.equalTo("UID", curUID);
+    queryUV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        var newRecord = new VisitUV();
+        newRecord.set("UID", curUID);
+        newRecord.set("times", 1);
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+  // 查询总访客数
+  queryUV = new AV.Query(VisitUV);
+  queryUV.count().then(function(totalUV) {
+    var baseUV = 1998;// 追加上之前近3年由不蒜子统计的大概数量
+    VISIT_INFO.totalUV = totalUV + baseUV;
+  });
+}, 100);
+
+
+  
+</script>
 
 
     
 
     <script>
-      //访问config.host的数据统计
-      // if (
-      //   typeof TDGA !== "undefined" &&
-      //   "congzhou09.github.io" === location.hostname
-      // ) {
-      //   TDGA.Account({
-      //     accountId: sessionStorage.getItem("__TD_sessionId")
-      //   });
-
-      //   TDGA.onEvent("visit", {
-      //     destination: location.hostname,
-      //     referrer: document.referrer
-      //   });
-      // }
       //service-worker
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

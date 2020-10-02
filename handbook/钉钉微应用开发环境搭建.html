@@ -42,11 +42,24 @@
     
 
     
+
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.6.1/dist/av-min.js"></script>
+    <script src="/js/util.min.js"></script>
 </head>
 
   <body>
+
+    <script>
+      var VISIT_INFO = {};
+      defineObserveVar(VISIT_INFO, 'totalPV');
+      defineObserveVar(VISIT_INFO, 'curPagePV');
+      defineObserveVar(VISIT_INFO, 'totalUV');
+    </script>
+
     <div id="loading" class="active"></div>
- <!--class="hide"-->
+
+
+    <!--class="hide"-->
 <aside id="menu">
   <div class="inner flex-row-vertical">
     
@@ -158,8 +171,8 @@
 
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <span class="iconfont icon-eye" style="margin-right:5px;font-size:12px;"></span><span id="busuanzi_value_page_pv"></span>
+<span id="container_page_pv" title="文章总阅读量" style='display:none'>
+    <span class="iconfont icon-eye" style="margin-right:5px;font-size:12px;"></span><span id="value_page_pv"></span>
 </span>
 
 
@@ -238,6 +251,32 @@
 
 
 
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="/js/valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var required_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            appId: "tq4lHkryFNXHsw9SOypjPRwx-gzGzoHsz",
+            appKey: "lFmuObNsezjTPj5e86R1TgOg",
+            avatar: "mp",
+            placeholder: "欢迎留言(支持Markdown语法), 将展示您邮箱绑定的Gravatar头像(如果有的话~)",
+            meta: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10",
+            recordIP: false,
+            requiredFields: required_info
+        })
+    </script>
+    <!-- Valine Comments end -->
+
 
 
 
@@ -252,15 +291,18 @@
             <span>Copyright &copy; 2009-2020</span>
 
             
+
             
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        总访客数：<span id="busuanzi_value_site_uv"></span>
+              
+    <span id="container_site_uv" style='display:none'>
+        总访客数：<span id="value_site_uv"></span>
     </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        总访问量：<span id="busuanzi_value_site_pv"></span>
+    <span id="container_site_pv" style='display:none'>
+        总访问量：<span id="value_site_pv"></span>
     </span>
 
 
+            
         </p>
     </div>
 </footer>
@@ -269,17 +311,17 @@
     <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" style="text-decoration:none;"><span class="iconfont icon-arrow-up" style="font-size:25px;font-weight:bold;"></span></a>
 
- <!-- <script src="/js/waves.min.js"></script> -->
+
+
+    <!-- <script src="/js/waves.min.js"></script> -->
 <script>
   var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
-
   
-
-  lazyScripts.push('/js/busuanzi.pure.min.js');
 </script>
 
 <script src="/js/main.min.js"></script>
- 
+
+  
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
@@ -297,30 +339,127 @@
 </li>
 </template>
 
-<script src="/js/search.min.js"></script>
- 
- 
- 
+  <script src="/js/search.min.js"></script>
 
+
+
+
+
+
+
+
+<script>
+  // 基于LearnCloud的 pv|uv|阅读量
+  
+    
+
+    
+      Observer.callback = function(){
+        var pvElem = document.querySelector("#value_page_pv");
+        pvElem.innerText = VISIT_INFO.curPagePV;
+        pvElem.parentNode.style.display='inline-block';
+      }
+      VISIT_INFO.curPagePV;
+      Observer.callback = null;
+    
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_pv");
+      pvElem.innerText = VISIT_INFO.totalPV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalPV;
+    Observer.callback = null;
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_uv");
+      pvElem.innerText = VISIT_INFO.totalUV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalUV;
+    Observer.callback = null;
+
+    // lazyScripts.push({url: '/js/visit_count.min.js', async: false});
+    setTimeout(function() {
+  var VisitPV = AV.Object.extend("visit_pv");
+  var VisitUV = AV.Object.extend("visit_uv");
+
+  // 记录pv
+  var queryPV = new AV.Query(VisitPV);
+  var pathName = location.pathname;
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryPV.equalTo("url", pathName);
+    queryPV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        VISIT_INFO.curPagePV = theRecord.get("times");
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        VISIT_INFO.curPagePV = 0;
+        var newRecord = new VisitPV();
+        newRecord.set("url", pathName);
+        newRecord.set("times", 1);
+        
+          var title = document.querySelector('.post-card-title').innerText;
+          newRecord.set("title", title);
+        
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+
+  // 调用云函数获取pv总数
+  AV.Cloud.run('total_pv',{remote:true}).then(data=>{
+    VISIT_INFO.totalPV = data;
+  })
+
+  // 记录uv
+  var curUID = localStorage.getItem("blog_UID");
+  if (!curUID) {
+    curUID = generateUID();
+    localStorage.setItem("blog_UID", generateUID());
+  }
+  var queryUV = new AV.Query(VisitUV);
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryUV.equalTo("UID", curUID);
+    queryUV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        var newRecord = new VisitUV();
+        newRecord.set("UID", curUID);
+        newRecord.set("times", 1);
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+  // 查询总访客数
+  queryUV = new AV.Query(VisitUV);
+  queryUV.count().then(function(totalUV) {
+    var baseUV = 1998;// 追加上之前近3年由不蒜子统计的大概数量
+    VISIT_INFO.totalUV = totalUV + baseUV;
+  });
+}, 100);
+
+
+  
+</script>
 
 
     
 
     <script>
-      //访问config.host的数据统计
-      // if (
-      //   typeof TDGA !== "undefined" &&
-      //   "congzhou09.github.io" === location.hostname
-      // ) {
-      //   TDGA.Account({
-      //     accountId: sessionStorage.getItem("__TD_sessionId")
-      //   });
-
-      //   TDGA.onEvent("visit", {
-      //     destination: location.hostname,
-      //     referrer: document.referrer
-      //   });
-      // }
       //service-worker
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

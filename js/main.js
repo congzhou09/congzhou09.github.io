@@ -423,8 +423,8 @@
     loadScript: function(scripts) {
       scripts.forEach(function(src) {
         var s = d.createElement("script");
-        s.src = src;
-        s.async = true;
+        s.src = src.url;
+        s.async = src.async;
         body.appendChild(s);
       });
     }
