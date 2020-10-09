@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    <!-- <script src="https://h5.talkingdata.com/g/h5/v1/0AE317EE4D2244F58B38512F639EBB4E" type="text/javascript"></script> -->
+    
+    
+    
+    <title>Babel相关内容串联 | Congzhou&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="keywords" content="Babel">
+    <meta name="description" content="基本概念●Babel是个JS编译器，包含“parsing”、“transforming”、“generation”三个阶段处理过程，它本身是个空盒子，具体处理过程是通过各种插件(plugin)实现的，通过配置不同的插件组合达到不同的处理目的；●plugin有两类：（1）Syntax Plugins(语法插件)，用于使babel支持对特定语法的parse；（2）Transform Plugins(转">
+<meta name="keywords" content="Babel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Babel相关内容串联">
+<meta property="og:url" content="https://congzhou09.github.io/knowledge/Babel相关内容串联.html">
+<meta property="og:site_name" content="Congzhou&#39;s Blog">
+<meta property="og:description" content="基本概念●Babel是个JS编译器，包含“parsing”、“transforming”、“generation”三个阶段处理过程，它本身是个空盒子，具体处理过程是通过各种插件(plugin)实现的，通过配置不同的插件组合达到不同的处理目的；●plugin有两类：（1）Syntax Plugins(语法插件)，用于使babel支持对特定语法的parse；（2）Transform Plugins(转">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://congzhou09.github.io/knowledge/Babel相关内容串联/babel_procedure.jpg">
+<meta property="og:updated_time" content="2020-10-09T10:02:42.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Babel相关内容串联">
+<meta name="twitter:description" content="基本概念●Babel是个JS编译器，包含“parsing”、“transforming”、“generation”三个阶段处理过程，它本身是个空盒子，具体处理过程是通过各种插件(plugin)实现的，通过配置不同的插件组合达到不同的处理目的；●plugin有两类：（1）Syntax Plugins(语法插件)，用于使babel支持对特定语法的parse；（2）Transform Plugins(转">
+<meta name="twitter:image" content="https://congzhou09.github.io/knowledge/Babel相关内容串联/babel_procedure.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Congzhou&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/tiger.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+    
+
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.6.1/dist/av-min.js"></script>
+    <script src="/js/util.min.js"></script>
+</head>
+
+  <body>
+
+    <script>
+      var VISIT_INFO = {};
+      defineObserveVar(VISIT_INFO, 'totalPV');
+      defineObserveVar(VISIT_INFO, 'curPagePV');
+      defineObserveVar(VISIT_INFO, 'totalUV');
+    </script>
+
+    <div id="loading" class="active"></div>
+
+
+    <!--class="hide"-->
+<aside id="menu">
+  <div class="inner flex-row-vertical">
+    
+    <div class="brand-wrap">
+      <img class="brand-wrap-img" finalsrc="/img/brand.jpg" src="/img/brand-loading.jpg" alt="brandBackground">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+            <img finalsrc="/img/avatar.jpg" src="/img/avatar-loading.jpg" style="width:100%;" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <div class="nickname" style="margin-left:5px;">Congzhou</div>
+          <div class="mail"><span class="iconfont icon-youxiang" style="vertical-align: middle;"></span><span>yuancongzhou@yeah.net</span></div>
+          <div class="github-link"><a target="_blank" href=https://github.com/congzhou09><span class="iconfont icon-ic-github"></span>GitHub主页</a></div>
+        </hgroup>
+        <div class="hint-container"></div>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="iconfont icon icon-home" style="font-size:24px;"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="iconfont icon icon-archive" style="font-size:24px;"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="iconfont icon icon-tags" style="font-size:24px;"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="iconfont icon icon-categoryselected" style="font-size:24px;"></i>
+                分类
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+      <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" style="text-decoration:none;" id="menu-toggle">
+          <span class="iconfont icon-menu" style="font-size:21px;font-weight:bold;"></span>
+        </a>
+        <div class="flex-col header-title ellipsis">Babel相关内容串联</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" style="text-decoration:none;" id="search">
+                <span class="iconfont icon-search" style="font-size:24px;font-weight:bold;"></span>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h2 class="title">Babel相关内容串联</h2>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-07T14:51:48.000Z" itemprop="datePublished" class="page-time">
+  2020-10-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/knowledge/">知识解惑</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用Babel的方式"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用Babel的方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#babel-preset-env"><span class="post-toc-number">3.</span> <span class="post-toc-text">@babel/preset-env</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#babel-preset-env的babel配置项"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">@babel/preset-env的babel配置项</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#polyfill"><span class="post-toc-number">4.</span> <span class="post-toc-text">polyfill</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#babel-polyfill"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">@babel/polyfill</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#babel-runtime"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">@babel/runtime</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#从打包内容看polyfill方式与runtime方式区别"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">从打包内容看polyfill方式与runtime方式区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Babel配置文件"><span class="post-toc-number">5.</span> <span class="post-toc-text">Babel配置文件</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-Babel相关内容串联"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Babel相关内容串联</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-10-07 22:51:48" datetime="2020-10-07T14:51:48.000Z"  itemprop="datePublished">2020-10-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/knowledge/">知识解惑</a></li></ul>
+
+
+
+            
+<span id="container_page_pv" title="文章总阅读量" style='display:none'>
+    <span class="iconfont icon-eye" style="margin-right:5px;font-size:12px;"></span><span id="value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>●Babel是个JS编译器，包含“parsing”、“transforming”、“generation”三个阶段处理过程，它本身是个空盒子，具体处理过程是通过各种插件(plugin)实现的，通过配置不同的插件组合达到不同的处理目的；<br>●plugin有两类：<br>（1）Syntax Plugins(语法插件)，用于使babel支持对特定语法的parse；<br>（2）Transform Plugins(转译插件)，用于transforming阶段的插件，此类插件包含了parse阶段相关的Syntax Plugin并会在代码转译为目标等级代码期间自动使用它们；<br>●presets是为特定目的配置好的一组plugin的集合，主要包括支持官方标准的offical preset(如es2015、react)和处于实验阶段的experimental preset(如stage 0、stage 1)。如果仅编译小范围的ES语法，可以通过仅引入对应的plugin实现；<br>●preset及plugin的使用，除了npm安装，还需要通过Babel配置文件(如“.babelrc”)配置，配置内容对象的格式示例如下，presets和plugins分别是个数组，内容是preset或plugin名称字符串，当preset或plugin有自己的options则变成一个数组，数组第一个元素是preset或plugin名称字符串，第二个元素是对应的options对象；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    [</span><br><span class="line">      &quot;@babel/preset-env&quot;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;modules&quot;: false,</span><br><span class="line">        &quot;useBuiltIns&quot;: &quot;usage&quot;,</span><br><span class="line">        &quot;corejs&quot;: 3,</span><br><span class="line">        &quot;targets&quot;: &#123;</span><br><span class="line">          &quot;safari&quot;: &quot;6&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  &quot;plugins&quot;: [&quot;@babel/plugin-external-helpers&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>●配置多个preset与plugin情况下的执行顺序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）总体先执行 Plugin 在执行 Preset ，与二者声明次序无关；</span><br><span class="line">（2）多个Plugin 按照声明次序顺序执行；</span><br><span class="line">（3）多个Preset 按照声明次序逆序执行；</span><br></pre></td></tr></table></figure></p>
+<p>●Babel 每一次执行的工作流可以用下图表示，代码首先经由 babylon 解析成抽象语法树（AST），后经一些遍历和分析做AST转换（主要过程），最后根据转换后的 AST 生成新的常规代码；</p>
+<div class="img-container" style="width: 90%;"><br>    <img src="/knowledge/Babel相关内容串联/babel_procedure.jpg"><br></div>
+
+<h3 id="使用Babel的方式"><a href="#使用Babel的方式" class="headerlink" title="使用Babel的方式"></a>使用Babel的方式</h3><p>◇可以通过以下三种方式使用Babel做编译处理<br>（1）通过@babel-cli使用babel命令执行；<br>（2）通过webpack(babel-loader)和rollup(@rollup/plugin-babel)等打包工具调用；<br>（3）通过@babel/register(曾用名babel-register)为Node的require函数增加钩子，以在运行时调用require加载.es6, .es, .jsx 和.js 类型文件的时候先用babel进行转码处理，由于是实时转码更适合在Node开发环境使用；<br>◇无论使用哪种方式，@babel/core和Babel配置文件是必须的；</p>
+<h3 id="babel-preset-env"><a href="#babel-preset-env" class="headerlink" title="@babel/preset-env"></a>@babel/preset-env</h3><p>◆Babel 官方推荐使用 babel-preset-env（版本7开始改名为”@babel/preset-env”） 替代 babel-preset-es2015 和 babel-preset-es2016 以及 babel-preset-es2017等特定版本的preset；<br>◆@babel/preset-env包含es所有版本的preset(不包含stage类的preset)，会根据所配置的目标运行平台自动选择特定版本preset及相关plugin，自动选择的实现基于browserslist、compat-table、electron-to-chromium等开源项目维护的浏览器与es新特性及plugin的映射关系；<br>◆Babel配置文件中配置目标运行平台有如下两种方法，browserslist会根据配置生成一个目标浏览器的列表，这个列表可以通过npx browserslist “<em>配置字符串</em>“ 命令查看；<br>（1）browserslist：在没有配置”targets”或”ignoreBrowserslistConfig”时被使用，例如在package.json文件的中的如下内容（也支持单独一个.browserslistrc文件的方式）；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;browserslist&quot;: &quot;&gt; 0.25%, not dead&quot;  // 市场占有率大于0.25%的浏览器（不包括IE10和BlackBerry等停止升级的浏览器）</span><br></pre></td></tr></table></figure></p>
+<p>（2）targets：targets支持更多样的语法：string | Array<string> | { [string]: string }，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;targets&quot;: &quot;&gt; 0.25%, not dead&quot;  // 与上一条browserslist等价</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;targets&quot;: &#123;    // 指定特定具体目标环境</span><br><span class="line">    &quot;chrome&quot;: &quot;58&quot;,</span><br><span class="line">    &quot;ie&quot;: &quot;11&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></string></p>
+<p>◆如果未配置目标运行平台，preset-env会让Babel转换所有ECMAScript 2015+ 的代码，这样失去了面向各平台定制的意义，不推荐；</p>
+<h4 id="babel-preset-env的babel配置项"><a href="#babel-preset-env的babel配置项" class="headerlink" title="@babel/preset-env的babel配置项"></a>@babel/preset-env的babel配置项</h4><p>◆modules<br>（1）是否将ES6的module语法统一转换为指定的另一种module形式；<br>（2）取值：”amd” | “umd” | “systemjs” | “commonjs” | “cjs”（commonjs的简写） | “auto” | false，默认值为”auto”，表示根据caller配置项判断，使用打包工具调用Babel情况下打包工具会自动提供caller配置项的值；<br>◆targets.esmodules<br>（1）默认值是false，即认为目标平台不支持ES模块的定义与导入导出方式；<br>（2）支持<script type="module"></script>标签的浏览器是支持ES模块的，可以将此项设置为true；<br>（3）设置esmodules之后其他targets设置将被忽略；<br>◆useBuiltIns<br>（1）标识如何处理垫片(polyfill，详见下一节)，取值：”usage” | “entry” | false；<br>（2）默认值为false不做处理，此时Babel只转换新语法，不会转换polyfill所包含的Promise和Symbol等新的内置类型、Array.from和Object.assign等新的静态方法、Array.prototype.includes等新的实例方法、generator 方法；<br>（3）取值”usage” | “entry”需要安装@babel/polyfill（官方推荐按需分别安装core-js和regenerator-runtime，详见下一节）配合使用，并设置”corejs”配置项指明所使用core-js的版本；<br>（4）取值“entry”，需要在项目代码中手动引入core-js或regenerator-runtime，且当仅import某个单独特性时支持模糊写法(如：import “core-js/es/array”)，@babel/preset-env会根据目标环境引入与特性关联的各具体文件（如在目标safari 6配置下会引入core-js/modules/es.array.from、core-js/modules/es.array.for-each、core-js/modules/es.array.last-index-of、core-js/modules/es.array.copy-within 等文件的内容）;<br>（5）取值“usage”，无需在项目代码中手动引入任何core-js或regenerator-runtime，@babel/preset-env会根据代码实际使用了哪些新特性并结合目标环境引入具体文件内容；</p>
+<h3 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h3><h4 id="babel-polyfill"><a href="#babel-polyfill" class="headerlink" title="@babel/polyfill"></a>@babel/polyfill</h4><p>■@babel/polyfill(曾用名babel-polyfill)包含core-js(polyfill ES features)和regenerator-runtime(to use transpiled generator functions)两部分，用于模拟一个完整的ES2015+目标环境；<br>■官方推荐按需分别安装core-js或regenerator-runtime 替代@babel/polyfill，并且不要直接整体引入，而推荐通过@babel/preset-env 的UseBuiltins选项配置或纯手动明确import具体的特性，从而避免不必要的输出包体积增加；<br>■@babel/polyfill垫片是通过在全局作用域增加类和函数定义、以及为内置类型和内置对象增加静态方法和增加prototype属性等修改全局环境的方式实现的，在不希望产生副作用的场景下，特别是项目定位是tool/library而不是application的时候，这种实现方式不适合；<br>■@babel/polyfill的使用：<br>（1）babel配置中按照上一节配置@babel/preset-env的“useBuiltIns”和“corejs”项，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...&quot;presets&quot;: [</span><br><span class="line">  ... </span><br><span class="line">  [&quot;@babel/preset-env&quot;,&#123;</span><br><span class="line">    &quot;useBuiltIns&quot;: &quot;usage&quot;,</span><br><span class="line">    &quot;corejs&quot;: 3,</span><br><span class="line">    ...  </span><br><span class="line">  &#125;],</span><br><span class="line">  ...</span><br><span class="line">]...</span><br></pre></td></tr></table></figure></p>
+<p>（2）如果使用rollup则配置@rollup/plugin-babel的”babelHelpers”值为“bundled”；</p>
+<h4 id="babel-runtime"><a href="#babel-runtime" class="headerlink" title="@babel/runtime"></a>@babel/runtime</h4><p>○@babel/runtime(曾用名babel-runtime)通过注入模块化helper(modular runtime helpers )的方式实现core-js和regenerator-runtime两部分垫片；<br>○除了安装@babel/runtime作为dependency之外，需要根据要使用的core-js版本安装具体版本的corejs（如@babel/runtime-corejs3）作为dev-dependency，也需要安装@babel/plugin-transform-runtime插件用于处理重复helper代码的重用；<br>○@babel/runtime的使用：<br>（1）babel配置中无需像polyfill那样配置@babel/preset-env的“useBuiltIns”和“corejs”项；<br>（2）babel配置中增加@babel/plugin-transform-runtime的如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...&quot;plugins&quot;: [</span><br><span class="line">  ... </span><br><span class="line">  [&quot;@babel/plugin-transform-runtime&quot;,&#123;</span><br><span class="line">    &quot;corejs&quot;: 3</span><br><span class="line">  &#125;],</span><br><span class="line">  ...</span><br><span class="line">]...</span><br></pre></td></tr></table></figure></p>
+<p>（3）如果使用rollup则配置@rollup/plugin-babel的”babelHelpers”值为“runtime”；</p>
+<h4 id="从打包内容看polyfill方式与runtime方式区别"><a href="#从打包内容看polyfill方式与runtime方式区别" class="headerlink" title="从打包内容看polyfill方式与runtime方式区别"></a>从打包内容看polyfill方式与runtime方式区别</h4><p>◆以webpack打包目标环境不支持Array.from和Array.prototype.includes的以下原始内容为例；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Array.from(&quot;how are you&quot;);</span><br><span class="line">[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;].includes(&quot;a&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>◆使用的polyfill方式的相应输出大致如下(已简化)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">/* 38 */  /*Array.from的实现与全局注册*/</span><br><span class="line">...</span><br><span class="line">/* 39 */  /*Array.prototype.includes的实现与全局注册*/</span><br><span class="line">...</span><br><span class="line">var core_js_modules_es_array_from__IMPORTED_MODULE = __webpack_require__(38);</span><br><span class="line">var core_js_modules_es_array_includes__IMPORTED_MODULE  = __webpack_require__(39);</span><br><span class="line"></span><br><span class="line">Array.from(&quot;how are you&quot;);</span><br><span class="line">[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;].includes(&quot;a&quot;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>◆使用的runtime方式的相应输出大致如下(已简化)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">/* 38 */  /*Array.from的模块化实现*/</span><br><span class="line">...</span><br><span class="line">/* 39 */  /*Array.prototype.includes的模块化实现*/</span><br><span class="line">...</span><br><span class="line">var _babel_runtime_array_from__IMPORTED_MODULE = __webpack_require__(38);</span><br><span class="line">var _babel_runtime_instance_includes__IMPORTED_MODULE  = __webpack_require__(39);</span><br><span class="line"></span><br><span class="line">_babel_runtime_array_from__IMPORTED_MODULE()(&quot;how are you&quot;);</span><br><span class="line">_babel_runtime_instance_includes__IMPORTED_MODULE().call( [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], &quot;a&quot;));</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>◆最大区别在于polyfill方式由于修改了全局环境，原始代码写法被保留而不会被改写；</p>
+<h3 id="Babel配置文件"><a href="#Babel配置文件" class="headerlink" title="Babel配置文件"></a>Babel配置文件</h3><p>○Babel有两种配置文件，可以同时使用或单独使用；<br>（1）项目配置（Project-wide configuration），对整个项目生效，包含项目下的node_modules（除非通过”exclude”排除），适合项目范围内广泛生效的配置，有”babel.config.js文件”和”babel.config.json文件”两种具体形式；<br>（2）文件关联配置（File-relative configuration），有”.babelrc(同.babelrc.js)文件”<br>和”项目package.json文件中的babel字段”两种具体形式；<br>○关于Project-wide配置：<br>（1）root属性指明当前项目的根目录，Babel默认以当前路径为root属性值，并在root路径下查找与应用”babel.config.js”文件配置；<br>○关于File-relative配置：<br>（1）适合为项目的子部分做配置；<br>（2）Babel从被编译文件向上逐级查找与应用File-relative配置，未查找到则终止于package.json文件；<br>（3）查找File-relative配置的范围仅限通过babelrcRoots属性包含的路径，默认与root属性值一致，查找范围之外的文件关联配置Babel不会处理；<br>（4）Babel 7新增特性： .babelrc等File-relative配置的作用范围仅限package自己，不包含文件层级下面的node_modules，也不会检测node_modules内的.babelrc，即使通过“include”包含了node_modules；</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+
+    </div>
+    <footer style="width:100%;">
+        <h5>
+            
+<span class="post-time">
+    最后更新时间：<time datetime="2020-10-09T10:02:42.477Z" itemprop="dateUpdated">2020-10-09 18:02:42</time>
+</span>
+
+
+            
+            <span style="float:right;"><img src="/img/avatar.jpg" alt="Congzhou">Congzhou</span>
+        </h5>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Babel/">Babel</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="next">
+      <a href="/knowledge/Java-web-技术与架构演进历史.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="iconfont icon-arrow1r"></i></div>
+        <h4 class="title">Java web 技术与架构演进历史</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="/js/valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var required_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            appId: "tq4lHkryFNXHsw9SOypjPRwx-gzGzoHsz",
+            appKey: "lFmuObNsezjTPj5e86R1TgOg",
+            avatar: "mp",
+            placeholder: "欢迎留言(支持Markdown语法), 将展示您邮箱绑定的Gravatar头像(如果有的话~)",
+            meta: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10",
+            recordIP: false,
+            requiredFields: required_info
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+
+
+</div>
+ <footer class="footer">
+    <div class="bottom">
+        <p>
+            <span>Copyright &copy; 2009-2020</span>
+
+            
+
+            
+              
+    <span id="container_site_uv" style='display:none'>
+        总访客数：<span id="value_site_uv"></span>
+    </span>
+    <span id="container_site_pv" style='display:none'>
+        总访问量：<span id="value_site_pv"></span>
+    </span>
+
+
+            
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light" style="text-decoration:none;"><span class="iconfont icon-arrow-up" style="font-size:25px;font-weight:bold;"></span></a>
+
+
+
+    <!-- <script src="/js/waves.min.js"></script> -->
+<script>
+  var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+  
+</script>
+
+<script src="/js/main.min.js"></script>
+
+  
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+  <script src="/js/search.min.js"></script>
+
+
+
+
+
+
+
+
+<script>
+  // 基于LearnCloud的 pv|uv|阅读量
+  
+    
+
+    
+      Observer.callback = function(){
+        var pvElem = document.querySelector("#value_page_pv");
+        pvElem.innerText = VISIT_INFO.curPagePV;
+        pvElem.parentNode.style.display='inline-block';
+      }
+      VISIT_INFO.curPagePV;
+      Observer.callback = null;
+    
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_pv");
+      pvElem.innerText = VISIT_INFO.totalPV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalPV;
+    Observer.callback = null;
+
+    Observer.callback = function(){
+      var pvElem = document.querySelector("#value_site_uv");
+      pvElem.innerText = VISIT_INFO.totalUV;
+      pvElem.parentNode.style.display='inline-block';
+    }
+    VISIT_INFO.totalUV;
+    Observer.callback = null;
+
+    // lazyScripts.push({url: '/js/visit_count.min.js', async: false});
+    setTimeout(function() {
+  var VisitPV = AV.Object.extend("visit_pv");
+  var VisitUV = AV.Object.extend("visit_uv");
+
+  // 记录pv
+  var queryPV = new AV.Query(VisitPV);
+  var pathName = location.pathname;
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryPV.equalTo("url", pathName);
+    queryPV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        VISIT_INFO.curPagePV = theRecord.get("times");
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        VISIT_INFO.curPagePV = 0;
+        var newRecord = new VisitPV();
+        newRecord.set("url", pathName);
+        newRecord.set("times", 1);
+        
+          var title = document.querySelector('.post-card-title').innerText;
+          newRecord.set("title", title);
+        
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+
+  // 调用云函数获取pv总数
+  AV.Cloud.run('total_pv',{remote:true}).then(data=>{
+    VISIT_INFO.totalPV = data;
+  })
+
+  // 记录uv
+  var curUID = localStorage.getItem("blog_UID");
+  if (!curUID) {
+    curUID = generateUID();
+    localStorage.setItem("blog_UID", generateUID());
+  }
+  var queryUV = new AV.Query(VisitUV);
+  
+  if(!location.hostname.match('localhost')){
+  
+    queryUV.equalTo("UID", curUID);
+    queryUV.find().then(data => {
+      if (data.length) {
+        var theRecord = data[0];
+        theRecord.increment("times", 1);
+        theRecord.save();
+      } else {
+        var newRecord = new VisitUV();
+        newRecord.set("UID", curUID);
+        newRecord.set("times", 1);
+        newRecord.save();
+      }
+    });
+  
+  }
+  
+  // 查询总访客数
+  queryUV = new AV.Query(VisitUV);
+  queryUV.count().then(function(totalUV) {
+    var baseUV = 1998;// 追加上之前近3年由不蒜子统计的大概数量
+    VISIT_INFO.totalUV = totalUV + baseUV;
+  });
+}, 100);
+
+
+  
+</script>
+
+
+    
+
+    <script>
+      //service-worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(result => {
+              console.log(`service-worker register ok`);
+            })
+            .catch(error => {
+              console.log(`service-worker register failed: ${error}`);
+            });
+        });
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          alert('检测到缓存资源更新，此页面将刷新');
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>
