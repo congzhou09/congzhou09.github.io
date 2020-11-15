@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://congzhou09.github.io/"/>
-  <updated>2020-10-09T10:02:42.477Z</updated>
+  <updated>2020-11-15T15:34:53.931Z</updated>
   <id>https://congzhou09.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>钉钉微应用与小程序的免登流程</title>
+    <link href="https://congzhou09.github.io/handbook/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E4%B8%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%85%8D%E7%99%BB%E6%B5%81%E7%A8%8B.html"/>
+    <id>https://congzhou09.github.io/handbook/钉钉微应用与小程序的免登流程.html</id>
+    <published>2020-10-21T08:41:46.000Z</published>
+    <updated>2020-11-15T15:34:53.931Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h4><p>♂钉钉官方开发文档中对微应用免密码登录流程的说明在<a href="https://ding-doc.dingtalk.com/doc#/serverapi2/clotub" target="_blank" rel="noopener">此页面</a>，总体分三步：<br>（1）获取免登授权码；<br>（2）获取access_token；<br>（3）获取userid；<br>♂画了这个过程的时序图如下，方便对其更直观的了解，小程序的免登流程基本一致，也含在其中；</p><div class="img-container" style="width: 95%;"><br>    <img src="https://congzhou09.gitlab.io/drawio_storage/blog/%E9%92%89%E9%92%89%E5%BE%AE%E5%BA%94%E7%94%A8%E4%B8%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%85%8D%E7%99%BB%E6%B5%81%E7%A8%8B.svg" alt="免登流程时序图,来自congzhou09.gitlab.io"><br></div><h4 id="画这个图的工具"><a href="#画这个图的工具" class="headerlink" title="画这个图的工具"></a>画这个图的工具</h4><p>♀之前画图用ProcessOn，虽然画图功能好用又可以多人协作但免费版只能保存为图片格式而且有数量限制；<br>♀昨天发现一个超级好的在线画图工具：<a href="https://app.diagrams.net" target="_blank" rel="noopener">diagrams.net</a>，支持UML类图、时序图、ER图等，我这张图就是用它画的，最大的优点有两个：<br>（1）可以保存文件到本地及下次打开文件（png图片格式同样支持二次编辑），也可以把图保存到线上代码仓库如<a href="https://gitlab.com" target="_blank" rel="noopener">GitLab</a>，通过配置代码仓库member及git工作流也能实现多人协作，当然也就免费和没有数量限制咧；<br>（2）使用代码仓库的<a href="https://about.gitlab.com/blog/2016/04/04/gitlab-pages-get-started/" target="_blank" rel="noopener">Pages</a>静态资源功能可以将图作为公网资源用url访问，这样每次改图就可以自动同步修改咧；</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h4&gt;&lt;p&gt;♂钉钉官方开发文档中对微应用免密码登录流程的说明在&lt;a href=&quot;https://ding-doc.dingtalk.com/doc#/s
+      
+    
+    </summary>
+    
+      <category term="操作手册" scheme="https://congzhou09.github.io/categories/handbook/"/>
+    
+    
+      <category term="钉钉" scheme="https://congzhou09.github.io/tags/%E9%92%89%E9%92%89/"/>
+    
+  </entry>
   
   <entry>
     <title>Babel相关内容串联</title>
@@ -169,9 +194,9 @@
       <category term="实践总结" scheme="https://congzhou09.github.io/categories/practice/"/>
     
     
-      <category term="ServiceWorker" scheme="https://congzhou09.github.io/tags/ServiceWorker/"/>
-    
       <category term="webpack" scheme="https://congzhou09.github.io/tags/webpack/"/>
+    
+      <category term="ServiceWorker" scheme="https://congzhou09.github.io/tags/ServiceWorker/"/>
     
       <category term="按需加载" scheme="https://congzhou09.github.io/tags/%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/"/>
     
@@ -539,37 +564,6 @@
       <category term="虚拟化" scheme="https://congzhou09.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
     
       <category term="虚拟机" scheme="https://congzhou09.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>真正实现elment.ui的按需引入</title>
-    <link href="https://congzhou09.github.io/practice/%E7%9C%9F%E6%AD%A3%E5%AE%9E%E7%8E%B0elment-ui%E7%9A%84%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5.html"/>
-    <id>https://congzhou09.github.io/practice/真正实现elment-ui的按需引入.html</id>
-    <published>2018-09-14T02:03:24.000Z</published>
-    <updated>2020-02-04T06:23:30.747Z</updated>
-    
-    <content type="html"><![CDATA[<p>element.ui官网文档给出的按需引入组件的<a href="http://element-cn.eleme.io/#/zh-CN/component/quickstart" target="_blank" rel="noopener">说明</a>，属于是在main.js中为Vue注册全局组件的方式，<br>某页面即使不使用某组件也会在打包代码中包含它，如果希望某个组件仅仅在单独页面里按需引入，则可以使用本文方法。</p><h3 id="官方方法"><a href="#官方方法" class="headerlink" title="官方方法"></a>官方方法</h3><p>官方方法分两步：<br>（1）安装babel-plugin-component，修改“.babelrc”文件内容；（经验证此步骤不再需要，环境：webpack-4.18.0、vue-2.5.17，由于webpack2之后import原生支持ES6所以未使用babel）<br>（2）在 main.js 中单独import组件并注册为全局组件，示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/****************main.js******************/</span><br><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import &#123; Button, Select &#125; from &apos;element-ui&apos;;</span><br><span class="line">import App from &apos;./App.vue&apos;;</span><br><span class="line"></span><br><span class="line">Vue.component(Button.name, Button);</span><br><span class="line">Vue.component(Select.name, Select);</span><br><span class="line">/* 或写为</span><br><span class="line"> * Vue.use(Button)</span><br><span class="line"> * Vue.use(Select)</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p><h3 id="真正按需引入的方法"><a href="#真正按需引入的方法" class="headerlink" title="真正按需引入的方法"></a>真正按需引入的方法</h3><p>思路就是把引用和注册组件的操作转在vue页面内进行，以局部注册Button为例：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/****************onePage.vue******************/</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">        &lt;el-button&gt;默认按钮&lt;/el-button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/ecmascript-6&quot;&gt;</span><br><span class="line">    import &#123; Button &#125; from &apos;element-ui&apos;;</span><br><span class="line">    export default&#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                //balaba</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;,</span><br><span class="line">        components:&#123;</span><br><span class="line">            ElButton: Button</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style rel=&quot;stylesheet/scss&quot; lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure><p>注意components那里不要简写成“Button”，因为组件名字是“ElButton”而不是同名的“Button”所以不能简写。<br>这里的“ElButton”其实就是官网方法中的“Button.name”的值，我是通过调试知道的。<br>目前用过的组件name都是前面加上“El”前缀，如果某个组件注册失败则需要调试或element-ui源码中查找其真实的name值。<br>或者使用如下通用但不美观的写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/ecmascript-6&quot;&gt;</span><br><span class="line">    import &#123; Button &#125; from &apos;element-ui&apos;;</span><br><span class="line">    let exportObj = &#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">              //balaba</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    exportObj.components = &#123;&#125;;</span><br><span class="line">    exportObj.components[Button.name] = Button;</span><br><span class="line"></span><br><span class="line">    export default exportObj;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;element.ui官网文档给出的按需引入组件的&lt;a href=&quot;http://element-cn.eleme.io/#/zh-CN/component/quickstart&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;说明&lt;/a&gt;，属于是在main.
-      
-    
-    </summary>
-    
-      <category term="实践总结" scheme="https://congzhou09.github.io/categories/practice/"/>
-    
-    
-      <category term="webpack" scheme="https://congzhou09.github.io/tags/webpack/"/>
-    
-      <category term="按需加载" scheme="https://congzhou09.github.io/tags/%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/"/>
-    
-      <category term="vue" scheme="https://congzhou09.github.io/tags/vue/"/>
-    
-      <category term="elment.ui" scheme="https://congzhou09.github.io/tags/elment-ui/"/>
     
   </entry>
   
