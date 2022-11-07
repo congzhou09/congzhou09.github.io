@@ -115,7 +115,7 @@
         titles = $("#post-content").querySelectorAll("h1, h2, h3, h4, h5, h6");
 
       toc
-        .querySelector('a[href="#' + titles[0].id + '"]')
+        .querySelector('a[href="#' + encodeURIComponent(titles[0].id) + '"]')
         .parentNode.classList.add("active");
 
       return {
@@ -129,7 +129,7 @@
             if (top > offset(titles[i]).y - headerH - 5) {
               toc.querySelector("li.active").classList.remove("active");
 
-              var active = toc.querySelector('a[href="#' + titles[i].id + '"]')
+              var active = toc.querySelector('a[href="#' + encodeURIComponent(titles[i].id) + '"]')
                 .parentNode;
               active.classList.add("active");
             }
@@ -138,7 +138,7 @@
           if (top < offset(titles[0]).y) {
             toc.querySelector("li.active").classList.remove("active");
             toc
-              .querySelector('a[href="#' + titles[0].id + '"]')
+              .querySelector('a[href="#' + encodeURIComponent(titles[0].id) + '"]')
               .parentNode.classList.add("active");
           }
         }
