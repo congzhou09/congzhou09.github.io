@@ -6,7 +6,7 @@
   <link href="https://congzhou09.github.io/atom.xml" rel="self"/>
   
   <link href="https://congzhou09.github.io/"/>
-  <updated>2023-01-01T12:57:37.665Z</updated>
+  <updated>2023-03-21T09:46:48.597Z</updated>
   <id>https://congzhou09.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动态import引起的打包体积增大</title>
+    <link href="https://congzhou09.github.io/problem/%E5%8A%A8%E6%80%81import%E5%BC%95%E8%B5%B7%E7%9A%84%E6%89%93%E5%8C%85%E4%BD%93%E7%A7%AF%E5%A2%9E%E5%A4%A7.html"/>
+    <id>https://congzhou09.github.io/problem/%E5%8A%A8%E6%80%81import%E5%BC%95%E8%B5%B7%E7%9A%84%E6%89%93%E5%8C%85%E4%BD%93%E7%A7%AF%E5%A2%9E%E5%A4%A7.html</id>
+    <published>2023-03-21T07:24:23.000Z</published>
+    <updated>2023-03-21T09:46:48.597Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>◆ 正常情况下 webpack 的编译是从入口文件开始按照模块依赖关系仅对被依赖的文件做编译的。今天在某项目里增加了个模块文件写到一半保存而还没对其做 import ，但此时 webpackDevServer 就已经报出这个模块内的语法错误了。</p><h3 id="解决与总结"><a href="#解决与总结" class="headerlink" title="解决与总结"></a>解决与总结</h3><p>◇ 根据堆栈信息追到再上一级的报错位置，来到下面这个函数，由于把动态 import 封装到函数，传入函数的值是个变量。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">... ...</span><br><span class="line">function importFromPath(pathName) &#123;</span><br><span class="line">  ... ...</span><br><span class="line">  return import(`$&#123;pathName&#125;`);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>◇ 根据<a href="https://webpack.js.org/api/module-methods/#dynamic-expressions-in-import">webpack 文档</a>的说明并结合试验发现，此种情况下，该文件同层级及以下层级中的所有文件会被纳入 webpack 的编译与打包范围，从而导致了上述问题。</p><p>◇ 随着项目量级增加，当有更多不在依赖关系树上的文件通过此机制被引入后就会引起整体打包速度变慢和打包体积增大。所幸 webpack 针对 import()默认会创建一个新的 chunk 将其分离到单独的 bundle ，不会在打包结果部署后还影响其他模块的载入速度。</p><p>◇ webpack 提供了<a href="https://webpack.js.org/api/module-methods/#magic-comments">magic-comments</a>用于配置处理动态 import()的行为。其中的”webpackInclude”能限定搜索动态模块的范围，可以解决我的问题。</p><p>◇ 因此在 webapck 中使用”import(<em>变量</em>)”时最好增加”webpackInclude”注释，以防止无关文件对打包的影响。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h3&gt;&lt;p&gt;◆ 正常情况下 webpack 的编译是从入口文件开始按照模块依赖关系仅对被依赖的文件做编译的。今天在某项目里增加了个模块文件写到一半保存而</summary>
+      
+    
+    
+    
+    <category term="问题解决" scheme="https://congzhou09.github.io/categories/problem/"/>
+    
+    
+    <category term="webpack" scheme="https://congzhou09.github.io/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>Base64编码与DataUrl</title>
@@ -484,30 +508,6 @@
     <category term="webpack" scheme="https://congzhou09.github.io/tags/webpack/"/>
     
     <category term="按需加载" scheme="https://congzhou09.github.io/tags/%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微服务基本理解</title>
-    <link href="https://congzhou09.github.io/knowledge/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3.html"/>
-    <id>https://congzhou09.github.io/knowledge/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3.html</id>
-    <published>2020-02-17T03:18:41.000Z</published>
-    <updated>2020-02-17T03:24:51.582Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>◇微服务是一种架构风格，由Martin Fowler与James Lewis于2014年提出；<br>◇微服务方式是使用一套小服务来开发单个应用，每个服务运行在自己的进程中（每个服务可看作一个小的应用），并使用轻量级机制通信，通常是HTTP API，这些服务能够通过独立的自动化部署，可以分别使用不同的编程语言实现，以及不同数据存储技术，并保持最低限度的集中式管理；<br>◇微服务理念：有效拆分服务，提供一套统一基础架构使得各个微服务能独立的部署、运行、升级，具有轻量级的通信机制进行通信，在结构上松耦合而在功能上表现为一个整体，实现应用的敏捷开发与部署；<br>◇服务拆分原则：当一块业务不依赖或极少依赖其它服务，有独立的业务语义，为超过2个的其他服务或客户端提供数据，那么它就应该被拆分成一个独立的服务模块；<br>◇微服务相关开发工具：<br>（1）Spring Cloud为开发者提供了在分布式系统的配置管理、服务发现、断路器、智能路由、微代理、控制总线等开发工具包；<br>（2）Dubbo<br>（3）Dropwizard（关注单个微服务的开发）<br>◇服务间通信方式：<br>（1）REST，同步方式<br>（2）RPC，同步方式<br>（3）消息队列，异步方式</p><h3 id="单体架构相对微服务架构的缺点"><a href="#单体架构相对微服务架构的缺点" class="headerlink" title="单体架构相对微服务架构的缺点"></a>单体架构相对微服务架构的缺点</h3><p>●代码与模块越多，逻辑复杂性越高越难理解，越难解决遇到的问题；<br>●项目部署与启动速度逐渐变慢，修复局部模块问题需要重启整个项目使问题处理速度变慢；<br>●新技术重构与升级项目的成本逐渐变高，新加模块使用新技术受限制，加入数据分析与监控容易出现性能瓶颈；<br>●不利于按各模块需求伸缩资源（CPU&#x2F;内存&#x2F;数据库）；<br>微服务架构相对单体架构的缺点<br>△维护项目变多，处理分布式的场景变多，需要更强的故障处理机制机制；</p><h3 id="重要部件"><a href="#重要部件" class="headerlink" title="重要部件"></a>重要部件</h3><p>●API网关<br>（1）后台服务的聚合，在前端与后台之间提供统一的服务入口，让微服务对前端透明；<br>（2）提供安全、过滤、流量控制等API管理功能；<br>●服务发现，分布式管理各服务链接信息的注册与更新（例：Zookeeper、Eureka、Consul、Etcd）；<br>●故障处理<br>a.减少故障机率<br>（1）监控，各服务设置监控指标与提供状态，采集器采集，UI呈现（例：RedisExporter、MySQLExporter、Prometheus、Grafana）；<br>b.降低故障对整体的影响<br>（1）降级，当某服务的下游非核心服务停止工作，则暂时将其关闭，保证核心业务不中断；<br>（2）熔断，为了避免每次请求都等待超时导致链路资源长时占用进而导致请求堆积，每个服务对其下游服务使用熔断机制快速返回失败并通过定时健康检查自动恢复；</p><div class="img-container" style="width: 40%;">    <img src="/knowledge/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3/fusing.png" class=""></div>（3）限流，服务面对瞬时流量过大情况的自我保护，推荐区分服务的限流策略，可应对某个服务由于代码问题发起的大量请求；c.提供故障排查效率（1）链路跟踪（例：Dapper、Zipkin），查看请求经过哪些服务节点及各自的响应时长（2）日志分析，各服务日志采集与检索支持，通常用ELK<Elasticsearch搜索引擎-Logstash日志采集-Kibana UI组件>实现；### 应用实例■配置管理服务（1）配置管理服务集中管理其他各微服务在各运行环境下的配置，配置支持实时动态修改与自动更新到其他各微服务，支持版本控制与内容审计；（2）每个从配置管理服务请求自己的配置并缓存本地；（3）经典案例：Apollo、Spring Cloud默认使用Git存储配置内容；]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;◇微服务是一种架构风格，由Martin Fowler与James Lewis于2014年提出；&lt;br&gt;◇微服务方式是使用一套小服务来开发单个</summary>
-      
-    
-    
-    
-    <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
-    
-    
-    <category term="微服务" scheme="https://congzhou09.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
