@@ -6,7 +6,7 @@
   <link href="https://congzhou09.github.io/atom.xml" rel="self"/>
   
   <link href="https://congzhou09.github.io/"/>
-  <updated>2024-05-06T09:40:04.601Z</updated>
+  <updated>2024-05-11T10:13:32.781Z</updated>
   <id>https://congzhou09.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>&lt;State of GPT&gt;理解</title>
+    <link href="https://congzhou09.github.io/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3.html"/>
+    <id>https://congzhou09.github.io/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3.html</id>
+    <published>2024-05-08T11:00:57.000Z</published>
+    <updated>2024-05-11T10:13:32.781Z</updated>
+    
+    <content type="html"><![CDATA[<p>▲ 对 Microsoft Build 2023 上 Andrej Karpathy 演讲<a href="https://www.youtube.com/watch?v=bZQun8Y4L2A&t=1229s">State of GPT</a>的学习整理。<br>▲ <a href="https://karpathy.ai/stateofgpt.pdf">演讲 PPT 地址</a>。</p><h3 id="GPT-Assistant-是如何训练得到的"><a href="#GPT-Assistant-是如何训练得到的" class="headerlink" title="GPT Assistant 是如何训练得到的"></a>GPT Assistant 是如何训练得到的</h3><p>◇ 训练过程按先后顺序分为自左至右的 4 个阶段：Pretraining、Supervised Finetuning、Reward Modeling、Reinforcement Learning。<br>◇ 每个阶段都涉及 3 项内容：dataset、algorithm、model，其中 model 是通过 dataset+algorithm 训练得到的。</p><div class="img-container" style="width: 98%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/training-pipeline.png" class=""></div><h4 id="Pretraining"><a href="#Pretraining" class="headerlink" title="Pretraining"></a>Pretraining</h4><p>◇ 预训练阶段几乎占了整个训练 99% 的运算性能与运算时间。长达数月，其他三种阶段都属于微调，训练仅消耗数天甚至数小时。<br>◇ 预训练得到的模型称为 base model。base model 不同于 assistant model，用于内容预测生成而不是回答问题。<br>◇ 预训练数据有多种来源，例如 Meta 公司的 LLaMA 模型的数据来源如下图。既有网络爬取数据，也有高质量数据集。</p><div class="img-container" style="width: 75%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/dataset-of-base-model.png" class=""></div><p>◇ 数据集内容在使用前会通过 tokenization 被转换成整数序列。</p><div class="img-container" style="width: 80%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/tokenization.png" class=""></div><p>◇ LLaMA 相比 GPT-3 更擅长对大量文本数据做深入理解语义的任务（如阅读理解与问答），GPT 的优势是对写作、对话、翻译等各种通用任务都表现好。下图是 LLaMA 与 GPT-3 的训练参数的对比，其中 vocabulary size 表示训练数据包含的不重复词汇量，context length 表示训练的上下文长度，parameters 表示训练用到的参数数量，trained on tokens 表示训练数据转换成的 token 数量，可见 LLaMA 在 parameter 和 vocabulary 方面的数量更少但在 trained on tokens 方面的数量更多。模型表现受训练数据多个维度参数的影响。</p><div class="img-container" style="width: 95%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/params-of-gpt-vs-llama.png" class=""></div><p>◇ 大致训练过程：训练数据被放到数组(B,T)，行数 B 表示输入分为多少批，列数 T 表示最大上下文长度。数组的每一行包含多条数据序列，各条序列之间有约定好的分隔符。训练目标是让 transformer 神经网络能够在任意单元格(以图中绿格为例)根据当前及其左侧所有单元格趋于准确地推断出红色单元格的内容。</p><div class="img-container" style="width: 75%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/base-model-training-process.png" class=""></div><p>◇ 相较于传统的 NLP 模型，由于此处的 base model 在预训练过程中理解了大量文本结构与概念，针对特定任务对其进行微调时仅需较少的标注数据就能达到很好的性能。而从 GPT-2 开始，人们发现仅通过 prompt 而无需 finetuning 就能让 base model 较好完成某些特定任务，由此开启了“prompting over finetuning”的时代。</p><p>◇ GPT-2 的 base model 公布在官方 GitHub 仓库，GPT-3 的 base model 可通过官方 api 使用模型”Devanshi”调用，GPT-4 的 base model 没有发布。当前最好的 base model 是 LLaMA，但目前未支持商用。</p><p>◇ 下图是当前各模型信息。</p><div class="img-container" style="width: 98%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/current-models.png" class=""></div><h4 id="SFT（Supervised-finetuning）"><a href="#SFT（Supervised-finetuning）" class="headerlink" title="SFT（Supervised finetuning）"></a>SFT（Supervised finetuning）</h4><p>◆ 这一阶段的算法不变，只是数据集改成了 1-10 万数量的高质量”prompt+response”的问答示例，以向 assistant model 的方向训练。<br>◆ 训练结果模型称为 SFT model。</p><h4 id="RLHF（reinforcement-learning-from-human-feedback-）"><a href="#RLHF（reinforcement-learning-from-human-feedback-）" class="headerlink" title="RLHF（reinforcement learning from human feedback ）"></a>RLHF（reinforcement learning from human feedback ）</h4><p>□ RLHF 由 Reward modeling 和 Reinforcement learning 两个阶段组成。<br>□ Reward modeling 阶段的数据集量级在 10-100 万，内容是：上阶段 SFT model 对同一个 prompt 回答的多次 response+人为指定的效果分数排序。以此指导模型能针对一个 prompt 给相应的 response 打分。此阶段得到的模型称为 RM model。<br>□ Reinforcement learning 阶段的数据集量级在 1-10 万，内容是：prompt+SFT model 的多次回答+RM model 对相应回答的打分。以此强化模型针对 prompt 给出分数更高的 response。<br>□ 经过 RLHF 得到的模型称为 RLHF model。ChatGPT 就属于 RLHF model。<br>□ RLHF 提高了模型的结果分数但也使其丧失了部分多样性(variation)，于是在已知 N 个目标输出样例并期望得到具有更多多样性输出的场景，可以考虑使用 base model。<br>□ https://lmsys.org 网站提供了大语言模型(LLM)的竞技场(https://chat.lmsys.org/)，并会定期发布排名结果到blog(如：https://lmsys.org/blog/2023-12-07-leaderboard/)，目前排名靠前的模型都是RLHF model。</p><h3 id="实践中如何有效使用-GPT-assistant"><a href="#实践中如何有效使用-GPT-assistant" class="headerlink" title="实践中如何有效使用 GPT assistant"></a>实践中如何有效使用 GPT assistant</h3><p>■ 不同于人类从问题到答案的思维过程，transformer 的”think”是 tokens 维度的，它得出答案的过程是不断得基于现有 token(s) 预测下个 token。因此，当问题的回答需要推理时，通过将问题拆分步骤(Chain-of-Thought)的方式减少问题中每个 token 需要推理的数量，能得到更好的答案。拆分方式有两种：<br>（1）prompt 中按照拆分步骤的方式提供一组问答样例<br>（2）prompt 中说明”分步骤思考”(“think step by step”)</p><div class="img-container" style="width: 60%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/chain-of-thought.png" class=""></div><p>■ 当生成答案期间如果有一个 token 偏离了问题，transformer 不会返回检查纠正而是继续基于已生成 token 继续生成后续内容。但可以通过带上历史问答内容重新提问上次回答是否满足提问需求使它对上次回答检查并返回纠正后的回答。目前有称为”Tree of Thoughts”方向的研究，目的是将许多 prompts 与树检索算法结合以动态得到最优的生成答案从而避免出现需要纠正的情况。</p><div class="img-container" style="width: 90%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/tree-of-thoughts.png" class=""></div><p>■ LLM 的”心理癖好”：LLM 仅倾向于模仿所有相关训练数据生成完整答案而不会对训练数据中不同级别的答案做区分，比如对于一个物理问题，训练数据中通常既有专家级别的答案也有学生级别的答案甚至还有开玩笑的答案，LLM 默认会同时模仿所有级别的答案，这时可通过设置“Let’s work this out in a step by step way to be sure we have the right answer.”、“You’re a leading expert on this topic.”、“Pretend you have IQ 120.”这样的 prompt 来排除对低质量答案的模仿。<br>■ 为 LLM 指定可以使用的 tools(or plugin) 的场景中，在 prompt 中告诉 LLM 不擅长对应 tool 的能力可以让 tool 的调用更准确，因为 LLM 并不知道它自己不擅长的方面。<br>■ 检索增强(retrieval-augmented)的 LLM，LLM 只有从训练数据得来的知识记忆(memory)，如果将检索得到的提问相关信息放入 LLM 的上下文窗口(可称为 working memory)就可以同时发挥两者优势得到更好的答案。当前出现的方案是将信息分块后存入向量存储(如 LlamaIndex)，针对提问先检索得到相关信息再将其组织成 prompt。<br>■ 在希望限制 LLM 按照固定模板格式输出结果的场景，可以使用<a href="https://github.com/guidance-ai/guidance">guidance</a>。<br>■ finetuning 的本质是更新模型的参数权重，涉及更多专业技术，已知优化策略与相关工具：<br>（1）Parameter Efficient Finetuning(PEFT)。PEFT 是深度学习领域的一种优化策略，目标是在微调过程中尽可能减少需要更新的参数数量，而让模型的大部分参数权重固定，从而大幅降低 finetuning 成本。工具如：LoRA。<br>（2）Low-precision inference(低精度推理)。低精度推理是深度学习领域的一种优化策略，通过降低模型权重和激活的精度，减少模型的内存占用和计算需求而提高运行速度，在模型训练&#x2F;微调完成后使用。结合前面 PEFT 只针对微调部分做低精度推理也可降低计算成本。工具如：bitsandbytes。<br>■ 目前的 LLM 适合应用在与人为监督相结合的低风险领域，如灵感、建议、copilot。</p><h3 id="来自-GPT-4-的激励"><a href="#来自-GPT-4-的激励" class="headerlink" title="来自 GPT-4 的激励"></a>来自 GPT-4 的激励</h3><div class="img-container" style="width: 95%;">    <img src="/knowledge/State-of-GPT-%E7%90%86%E8%A7%A3/inspiration-from-gpt4.png" class=""></div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;▲ 对 Microsoft Build 2023 上 Andrej Karpathy 演讲&lt;a href=&quot;https://www.youtube.com/watch?v=bZQun8Y4L2A&amp;t=1229s&quot;&gt;State of GPT&lt;/a&gt;的学习整理。&lt;br&gt;▲ &lt;a</summary>
+      
+    
+    
+    
+    <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
+    
+    
+    <category term="GPT" scheme="https://congzhou09.github.io/tags/GPT/"/>
+    
+  </entry>
   
   <entry>
     <title>AFFiNE纯前端调试环境搭建</title>
@@ -478,32 +502,6 @@
     <category term="Java" scheme="https://congzhou09.github.io/tags/Java/"/>
     
     <category term="服务器" scheme="https://congzhou09.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>进程、线程、纤程、协程</title>
-    <link href="https://congzhou09.github.io/knowledge/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E7%BA%A4%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B.html"/>
-    <id>https://congzhou09.github.io/knowledge/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E7%BA%A4%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B.html</id>
-    <published>2020-08-05T14:11:16.000Z</published>
-    <updated>2023-11-17T02:39:52.397Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>◇ 进程是应用程序启动的实例，拥有自己的代码段、内存空间、所打开文件等系统资源。<br>◇ 线程从属于进程，是程序的实际执行者，拥有自己的执行栈空间、程序计数器、寄存器状态，这些常被称为”线程上下文”，其余进程资源是进程内所有线程共享的。<br>◇ 进程是资源分配的最小单位，线程是 CPU 调度的最小单位。<br>◇ CPU 调度线程时涉及到线程上下文的保存与恢复，上下文信息存储在系统内核的”线程控制块(Thread Control Block, TCB)”中，其中的程序计数器、寄存器状态直接保存值，执行栈则保存的是地址指针。线程执行栈原始内容保存在所属进程的内存空间中。<br>◇ 线程的五种状态及转换如下图：</p><div class="img-container" style="width: 80%;">    <img src="/knowledge/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E7%BA%A4%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B/thread_status.jpg" class=""></div><p>◇ 多线程间的协作涉及到如下性能问题：<br>（1）同步锁。<br>（2）线程上下文的切换。<br>◇ 纤程(fiber)是在用户空间模仿出的线程。<br>（1）纤程与线程的相同点：纤程有独立于创建它代码的生命周期，有调度器(scheduler)控制谁是下一个运行的纤程，有纤程间同步机制。<br>（2）纤程与线程的区别：纤程采用非抢占式上下文切换，即当前执行的任务会一直执行到主动放弃时间片。<br>（3）多个纤程可运行在同一个或不同的线程上，当不同线程上的纤程有队列任务等共享数据时，也会涉及 mutex 等同步问题，只是纤程挂起时，属于同一线程的其他纤程仍然可以运行。<br>（4）同一线程上多个纤程不会同时运行，避免了互相竞争资源。<br>（5）同一线程上多个纤程不会运行于多个 CPU 核上。<br>◇ 协程(coroutine &#x2F;,kəʊruː’tiːn&#x2F;)是支持挂起和恢复的子程序，用于执行非抢占式多任务（non-preemptive multitasking, cooperative multitasking）。<br>（1）协程与调用它的代码处在同一个生命周期。<br>（2）协程在行为上更像函数而不是线程：协程将调用和恢复的控制权交由调用者管理，被调用后代码执行的控制权立即转移到协程，直到协程主动挂起，代码执行控制权会自动回到调用者。<br>（3）互相协作的多个协程只能运行在同一个线程上，这些协程不会同时运行，不存在竞争资源的同步问题。<br>（4）协程切换与函数调用的最大区别在于切换入口点数量，普通函数只有一个入口点，协程则有多个。<br>◇ 纤程与协程的参考文档：<a href="https://stackoverflow.com/questions/42983095/coroutine-vs-fiber-difference-clarification">StackOverflow 问答链接</a>，<a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4024.pdf">问答中提到的论文</a>。<br>◇ 线程的调度是操作系统完成的。纤程和协程的调度则由应用程序或运行时库完成，所以被称为”用户空间的线程”。<br>◇ 纤程与协程有时被视为同一概念，特别是当纤程运行在同一个线程上的时候，具体看语境。</p><h4 id="JS-中的协程"><a href="#JS-中的协程" class="headerlink" title="JS 中的协程"></a>JS 中的协程</h4><p>◇ ES6 提供的 Generator 可实现协程，以下使用 Generator 方式实现的生产者-消费者示例，主程序是生产者视角，由生产者驱动消费者消费产品。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function* consume() &#123;</span><br><span class="line">  console.log(&#x27;consume start&#x27;);</span><br><span class="line">  while (true) &#123;</span><br><span class="line">    var product = yield;</span><br><span class="line"></span><br><span class="line">    // 结束标识</span><br><span class="line">    if (typeof product == &#x27;symbol&#x27; &amp;&amp; Symbol.keyFor(product) === &#x27;END&#x27;) &#123;</span><br><span class="line">      break;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(`consume $&#123;product&#125;`);</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(&#x27;consume exit&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const consumeIterator = consume();</span><br><span class="line"></span><br><span class="line">function produce() &#123;</span><br><span class="line">  consumeIterator.next(); // 启动消费者</span><br><span class="line">  let count = 1;</span><br><span class="line">  while (count &lt;= 5) &#123;</span><br><span class="line">    console.log(`produce $&#123;count&#125;`);</span><br><span class="line">    consumeIterator.next(count);</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line">  consumeIterator.next(Symbol.for(&#x27;END&#x27;));</span><br><span class="line">&#125;</span><br><span class="line">produce();</span><br></pre></td></tr></table></figure><p>◇ Generator 机制由相应的 JS 引擎实现，对于 Generator 函数，解释器会在 yield 位置适时停止，并在记录执行上下文时候额外带上当前执行到函数体的具体位置，用于再次调用 next()方法的时候恢复到上次暂停的函数体内位置继续执行。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h4&gt;&lt;p&gt;◇ 进程是应用程序启动的实例，拥有自己的代码段、内存空间、所打开文件等系统资源。&lt;br&gt;◇ 线程从属于进程，是程序的实际执行</summary>
-      
-    
-    
-    
-    <category term="知识解惑" scheme="https://congzhou09.github.io/categories/knowledge/"/>
-    
-    
-    <category term="计算机基础" scheme="https://congzhou09.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="协程" scheme="https://congzhou09.github.io/tags/%E5%8D%8F%E7%A8%8B/"/>
     
   </entry>
   

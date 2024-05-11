@@ -1295,8 +1295,7 @@ pre .javascript .function {
 .post-content h3,
 .post-content h4,
 .post-content h5 {
-  padding-top: 35px;
-  margin-top: -35px;
+  margin-top: 25px;
 }
 .post-content h1,
 .post-content h2,
