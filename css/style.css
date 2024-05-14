@@ -296,6 +296,12 @@ hr,
   -ms-flex: 0 auto;
   flex: 0 auto;
 }
+img[data-fancybox]:not([data-img-err]) {
+  cursor: pointer;
+}
+button[data-fancybox-toggle-fullscreen] {
+  display: none;
+}
 .container,
 #main {
   position: relative;
