@@ -90,7 +90,7 @@ td {
 ol,
 ul {
   margin: 12px 0;
-  padding: 0 0 0 32px;
+  padding: 0 0 0 12px;
 }
 ol.reset,
 ul.reset {
